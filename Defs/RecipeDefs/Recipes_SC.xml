@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <RecipeDef>
+        <defName>Compost</defName>
+        <label>make compost</label>
+        <description>Gather materials to compost.</description>
+        <jobString>Gathering materials to compost.</jobString>
+        <allowMixingIngredients>true</allowMixingIngredients>
+        <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+        <ingredients>
+          <li>
+            <filter>
+                <categories>
+                    <li>FoodRaw</li>
+                    <li>PlantFoodRaw</li>
+                </categories>
+            </filter>
+            <count>3.5</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <categories>
+                <li>FoodRaw</li>
+                <li>PlantFoodRaw</li>
+            </categories>
+        </fixedIngredientFilter>
+        <products>
+            <SC_Compost>15</SC_Compost>
+        </products>
+        <workSpeedStat>CookSpeed</workSpeedStat>
+        <effectWorking>Cook</effectWorking>
+        <soundWorking>Recipe_MakeStoneBlocks</soundWorking>
+        <recipeUsers>
+            <li>CraftingSpot</li>
+        </recipeUsers>
+    </RecipeDef>
+
+    <RecipeDef>
+        <defName>Fertilizer</defName>
+        <label>make fertilizer</label>
+        <description>Gather compost to make fertilizer.</description>
+        <jobString>Gathering compost to make fertilizer.</jobString>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>SC_Compost</li>
+                    </thingDefs>
+                </filter>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>SC_Compost</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <products>
+            <SC_Fertilizer>1</SC_Fertilizer>
+        </products>
+        <workSpeedStat>CookSpeed</workSpeedStat>
+        <effectWorking>Cook</effectWorking>
+        <soundWorking>Recipe_MakeStoneBlocks</soundWorking>
+        <recipeUsers>
+            <li>DrugLab</li>
+        </recipeUsers>
+    </RecipeDef>
+
+</Defs>

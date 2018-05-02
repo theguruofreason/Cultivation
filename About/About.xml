@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <ModMetaData>
+        <name>Simple Cultivation [B18]</name>
+        <author>MadWookie</author>
+        <url></url>
+        <targetVersion>0.18.0</targetVersion>
+        <description>A simple mod that adds the ability to cultivate soil.
+
+Tilled Soil 
+    Has %110 fertility.
+    Requires the "Simple Cultivation" research.
+    Costs 1 Fertilizer to construct.
+
+Cultivated Soil 
+    Has %150 fertility.
+    Requires the "Cultivation" research.
+    Costs 5 Fertilizer to construct.
+
+Compost
+    Requires the "Composting" research.
+    Costs 3.5 Nutrition (~75 items) to craft.
+    -Produces 15 Compost.
+    Craft at crafting spots.
+
+Fertilizer
+    Requires the "Composting" research.
+    Costs 1 Compost to craft.
+    -Produces 1 Fertilizer.
+    Craft at a Drug Lab.
+
+Secret Link: http://imgur.com/ZeWUSkr.jpg
+
+Have an idea or suggestion? Feel free to leave it in the comments!</description>
+</ModMetaData>

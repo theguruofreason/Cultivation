@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+    <ContainsPlantMatter>Contains {0} / {1} plant matter.</ContainsPlantMatter>
+    <ContainsCompost>Contains {0} / {1} compost.</ContainsCompost>
+    <Composted>Composted</Composted>
+    <CompostingProgress>Progress: {0} ({1} left)</CompostingProgress>
+    <CompostBoxOutOfIdealTemperature>Non-ideal temperature. Composting speed: {0}</CompostBoxOutOfIdealTemperature>
+</LanguageData>
