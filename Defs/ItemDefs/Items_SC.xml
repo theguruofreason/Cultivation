@@ -25,7 +25,7 @@
       <MarketValue>1</MarketValue>
       <Mass>3.0</Mass>
       <MaxHitPoints>50</MaxHitPoints>
-      <Flammability>0.8</Flammability>
+      <Flammability>2.0</Flammability>
       <Beauty>-10</Beauty>
       <Cleanliness>-5</Cleanliness>
     </statBases>
@@ -56,11 +56,10 @@
     </thingCategories>
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <WorkToMake>450</WorkToMake>
       <MarketValue>8</MarketValue>
       <Mass>5.0</Mass>
       <MaxHitPoints>50</MaxHitPoints>
-      <Flammability>1.0</Flammability>
+      <Flammability>4.0</Flammability>
     </statBases>
     <techLevel>Industrial</techLevel>
     <researchPrerequisites>
