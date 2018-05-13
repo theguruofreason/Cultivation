@@ -31,7 +31,7 @@
     </statBases>
     <techLevel>Medieval</techLevel>
     <researchPrerequisites>
-      <li>Composting</li>
+      <li>SimpleCultivation</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -56,14 +56,14 @@
     </thingCategories>
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>8</MarketValue>
+      <MarketValue>12</MarketValue>
       <Mass>5.0</Mass>
       <MaxHitPoints>50</MaxHitPoints>
       <Flammability>4.0</Flammability>
     </statBases>
     <techLevel>Industrial</techLevel>
     <researchPrerequisites>
-      <li>Composting</li>
+      <li>Cultivation</li>
     </researchPrerequisites>
   </ThingDef>
 

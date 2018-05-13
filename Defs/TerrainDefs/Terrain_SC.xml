@@ -22,17 +22,17 @@
 	<TerrainDef ParentName="SC_TerrainBase">
 		<defName>GT_SoilTilled</defName>
 		<label>tilled soil</label>
-		<description>Crops grow %110 faster than on un-fertilized soil.</description>
+		<description>Crops grow %115 faster than on un-fertilized soil.</description>
 		<texturePath>SoilTilled</texturePath>
 		<costList>
-   			<SC_Fertilizer>1</SC_Fertilizer>
+   			<SC_Compost>2</SC_Compost>
  		</costList>
 		<layerable>true</layerable>
 		<statBases>
 			<Beauty>0.5</Beauty>
-			<WorkToBuild>90</WorkToBuild>
+			<WorkToBuild>500</WorkToBuild>
 		</statBases>
-		<fertility>1.1</fertility>
+		<fertility>1.15</fertility>
 		<researchPrerequisites><li>SimpleCultivation</li></researchPrerequisites>
 	</TerrainDef>
 
@@ -42,12 +42,12 @@
 		<description>Crops grow %150 faster than on un-fertilized soil.</description>
 		<texturePath>SoilCultivated</texturePath>
 		<costList>
-   			<SC_Fertilizer>5</SC_Fertilizer>
+   			<SC_Fertilizer>1</SC_Fertilizer>
  		</costList>
 		<layerable>true</layerable>
 		<statBases>
 			<Beauty>1</Beauty>
-			<WorkToBuild>180</WorkToBuild>
+			<WorkToBuild>800</WorkToBuild>
 		</statBases>
 		<fertility>1.5</fertility>
 		<researchPrerequisites><li>Cultivation</li></researchPrerequisites>
