@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ResearchProjectDef>
+    <defName>AC_Tilling</defName>
+    <label>tilling</label>
+    <description>Allows you to till soil.</description>
+    <baseCost>200</baseCost>
+    <techLevel>Medieval</techLevel>
+    <prerequisites></prerequisites>
+  </ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>AC_Composting</defName>
+		<label>composting</label>
+		<description>Allows you to compost.</description>
+		<baseCost>200</baseCost>
+		<techLevel>Medieval</techLevel>
+		<prerequisites>AC_Tilling</prerequisites>
+	</ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AC_SimpleCultivation</defName>
+    <label>simple cultivation</label>
+    <description>Allows you to create fertilizer.</description>
+    <baseCost>300</baseCost>
+    <techLevel>Medieval</techLevel>
+    <prerequisites>AC_Composting</prerequisites>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AC_AdvancedCultivation</defName>
+    <label>advanced cultivation</label>
+    <description>Allows you to create enriched fertilizer.</description>
+    <baseCost>500</baseCost>
+    <techLevel>Industrial</techLevel>
+    <prerequisites>AC_SimpleCultivation</prerequisites>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AC_MiraculousCultivation</defName>
+    <label>miracle cultivation</label>
+    <description>Allows you to create miracle fertilizer.</description>
+    <baseCost>800</baseCost>
+    <techLevel>Spacer</techLevel>
+    <prerequisites>AC_AdvancedCultivation</prerequisites>
+  </ResearchProjectDef>
+
+</Defs>

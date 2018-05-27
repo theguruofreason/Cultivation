@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <JobDef>
+    <defName>FillCompostBin</defName>
+    <driverClass>Advanced_Cultivation.JobDriver_FillCompostBin</driverClass>
+    <reportString>filling TargetA with raw compost.</reportString>
+  </JobDef>
+
+  <JobDef>
+    <defName>EmptyCompostBin</defName>
+    <driverClass>Advanced_Cultivation.JobDriver_EmptyCompostBin</driverClass>
+    <reportString>taking fermented compost out of TargetA.</reportString>
+  </JobDef>
+  
+</Defs>

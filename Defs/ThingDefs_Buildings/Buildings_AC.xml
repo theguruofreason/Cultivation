@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>AC_CompostBin</defName>
+    <label>compost bin</label>
+    <thingClass>Advanced_Cultivation.Building_AC_CompostBin</thingClass>
+    <graphicData>
+      <texPath>CompostBin</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+      </damageData>
+    </graphicData>
+    <minifiedDef>MinifiedFurniture</minifiedDef>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.45</fillPercent>
+    <pathCost>60</pathCost>
+    <statBases>
+      <WorkToBuild>600</WorkToBuild>
+      <Mass>8</Mass>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <description>A bin for fermenting raw compost into usable fermented compost.</description>
+    <costList>
+      <WoodLog>40</WoodLog>
+    </costList>
+    <comps>
+      <li Class="CompProperties_TemperatureRuinable">
+        <minSafeTemperature>-1</minSafeTemperature>
+        <maxSafeTemperature>32</maxSafeTemperature>
+        <progressPerDegreePerTick>0.00001</progressPerDegreePerTick>
+      </li>
+    </comps>
+    <tickerType>Rare</tickerType>
+    <rotatable>true</rotatable>
+    <designationCategory>Production</designationCategory>
+    <constructEffect>ConstructWood</constructEffect>
+    <researchPrerequisites>
+      <li>Composting</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+  <!--
+  Buildings just for looks.
+  These graphics should get drawn when compost bin has items in it.
+  They serve no other purpose, and should not be buildable.
+  -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>AC_CompostBinRaw</defName>
+    <label>compost bin raw</label>
+    <thingClass>Advanced_Cultivation.Building_AC_CompostBinRaw</thingClass>
+    <graphicData>
+      <texPath>CompostBinRaw</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+      </damageData>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>AC_CompostBinFermented</defName>
+    <label>compost bin fermented</label>
+    <thingClass>Advanced_Cultivation.Building_AC_CompostBinFermented</thingClass>
+    <graphicData>
+      <texPath>CompostBinFermented</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+      </damageData>
+    </graphicData>
+  </ThingDef>
+  
+</Defs>

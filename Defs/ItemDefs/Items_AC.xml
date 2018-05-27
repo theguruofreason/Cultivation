@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef>
+    <defName>AC_RawCompost</defName>
+    <thingClass>Thing</thingClass>
+    <category>Item</category>
+    <selectable>true</selectable>
+    <altitudeLayer>Item</altitudeLayer>
+    <alwaysHaulable>true</alwaysHaulable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <label>compost</label>
+    <description>Raw compost which needs to be fermented in a compost bin.</description>
+    <graphicData>
+      <texPath>Compost</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <stackLimit>75</stackLimit>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>1</MarketValue>
+      <Mass>1.0</Mass>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Beauty>-10</Beauty>
+      <Cleanliness>-5</Cleanliness>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef>
+    <defName>AC_FermentedCompost</defName>
+    <thingClass>Thing</thingClass>
+    <category>Item</category>
+    <selectable>true</selectable>
+    <altitudeLayer>Item</altitudeLayer>
+    <alwaysHaulable>true</alwaysHaulable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <label>fermented compost</label>
+    <description>Fermented compost is used to make Fertilizer.</description>
+    <graphicData>
+      <texPath>Compost</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <stackLimit>75</stackLimit>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>1</MarketValue>
+      <Mass>1.0</Mass>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Flammability>2.0</Flammability>
+      <Beauty>-20</Beauty>
+      <Cleanliness>-20</Cleanliness>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef Name="AC_FertilizerBase" Abstract="True">
+    <thingClass>Thing</thingClass>
+    <category>Item</category>
+    <selectable>true</selectable>
+    <altitudeLayer>Item</altitudeLayer>
+    <alwaysHaulable>true</alwaysHaulable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <rotatable>false</rotatable>
+    <stackLimit>15</stackLimit>
+    <thingCategories>
+      <li>AC_Fertilizer</li>
+    </thingCategories>
+    <useHitPoints>true</useHitPoints>
+  </ThingDef>
+
+  <ThingDef ParentName="AC_FertilizerBase">
+    <defName>AC_Fertilizer</defName>
+    <label>fertilizer</label>
+    <description>Fertilizer is used to make cultivated soil for farming.</description>
+    <graphicData>
+      <texPath>Fertilizer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>12</MarketValue>
+      <Mass>5.0</Mass>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Flammability>4.0</Flammability>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="AC_FertilizerBase">
+    <defName>AC_EnrichedFertilizer</defName>
+    <label>enriched fertilizer</label>
+    <description>Enriched fertilizer is used to make enriched soil for farming.</description>
+    <graphicData>
+      <texPath>Fertilizer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>18</MarketValue>
+      <Mass>5.0</Mass>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Flammability>4.5</Flammability>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="AC_FertilizerBase">
+    <defName>AC_MiracleFertilizer</defName>
+    <label>miracle fertilizer</label>
+    <description>Miracle fertilizer is used to make miracle soil for farming.</description>
+    <graphicData>
+      <texPath>Fertilizer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>30</MarketValue>
+      <Mass>5.0</Mass>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Flammability>5.0</Flammability>
+    </statBases>
+  </ThingDef>
+
+</Defs>
