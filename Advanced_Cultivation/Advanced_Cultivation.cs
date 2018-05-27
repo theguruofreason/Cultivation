@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 using Verse;
@@ -328,30 +326,34 @@ namespace Advanced_Cultivation
             yield break;
         }
 
-        public override void DrawAt(Vector3 drawLoc, bool flip = false )
+        public override void Draw()
         {
+            Vector3 drawPos = this.DrawPos;
+            drawPos.y += 0.05f;
+            drawPos.z += 0.25f;
             if (this.Empty)
             {
-                this.Graphic.Draw(drawLoc, this.Rotation, this, 0f);
+                base.Draw();
             }
-            if (this.Progress < 1f)
+            if (!this.Empty && this.Progress < 1f)
             {
-                this.Graphic.Draw(drawLoc, this.Rotation, this.CompostBinRaw, 0f);
+                this.Graphic.Draw(this.DrawPos, this.Rotation, this.CompostBinRaw);
+                this.Comps_PostDraw();
+                GenDraw.DrawFillableBar(new GenDraw.FillableBarRequest
+                {
+                    center = drawPos,
+                    size = Building_AC_CompostBin.BarSize,
+                    fillPercent = (float)this.compostCount / 25f,
+                    filledMat = this.BarFilledMat,
+                    unfilledMat = Building_AC_CompostBin.BarUnfilledMat,
+                    margin = 0.1f,
+                    rotation = Rot4.North
+                });
             }
             else
             {
-                this.Graphic.Draw(drawLoc, this.Rotation, this.CompostBinFermented, 0f);
-            }
-        }
-
-        public override void Draw()
-        {
-            base.Draw();
-            if (!this.Empty)
-            {
-                Vector3 drawPos = this.DrawPos;
-                drawPos.y += 0.05f;
-                drawPos.z += 0.25f;
+                this.Graphic.Draw(this.DrawPos, this.Rotation, this.CompostBinFermented);
+                this.Comps_PostDraw();
                 GenDraw.DrawFillableBar(new GenDraw.FillableBarRequest
                 {
                     center = drawPos,
@@ -451,6 +453,7 @@ namespace Advanced_Cultivation
 
     public class WorkGiver_EmptyCompostBin : WorkGiver_Scanner
     {
+
         public override ThingRequest PotentialWorkThingRequest
         {
             get
@@ -458,6 +461,7 @@ namespace Advanced_Cultivation
                 return ThingRequest.ForDef(ThingDefOf.AC_CompostBin);
             }
         }
+
         public override PathEndMode PathEndMode
         {
             get
@@ -465,6 +469,7 @@ namespace Advanced_Cultivation
                 return PathEndMode.Touch;
             }
         }
+
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
             Building_AC_CompostBin CompostBin = t as Building_AC_CompostBin;
@@ -474,6 +479,7 @@ namespace Advanced_Cultivation
                 !t.IsForbidden(pawn) &&
                 pawn.CanReserveAndReach(t, PathEndMode.Touch, pawn.NormalMaxDanger(), 1);
         }
+
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
             return new Job(JobDefOf.AC_EmptyCompostBin, t);
@@ -489,6 +495,7 @@ namespace Advanced_Cultivation
                 return (Building_AC_CompostBin)this.job.GetTarget(TargetIndex.A).Thing;
             }
         }
+
         protected Thing RawCompost
         {
             get
@@ -496,11 +503,13 @@ namespace Advanced_Cultivation
                 return this.job.GetTarget(TargetIndex.B).Thing;
             }
         }
+
         public override bool TryMakePreToilReservations()
         {
             return this.pawn.Reserve(this.CompostBin, this.job, 1, -1, null) &&
                 this.pawn.Reserve(this.RawCompost, this.job, 1, -1, null);
         }
+
         [DebuggerHidden]
         protected override IEnumerable<Toil> MakeNewToils()
         {
@@ -536,6 +545,7 @@ namespace Advanced_Cultivation
                 return (Building_AC_CompostBin)this.job.GetTarget(TargetIndex.A).Thing;
             }
         }
+
         protected Thing FermentedCompost
         {
             get
@@ -543,10 +553,12 @@ namespace Advanced_Cultivation
                 return this.job.GetTarget(TargetIndex.B).Thing;
             }
         }
+
         public override bool TryMakePreToilReservations()
         {
             return this.pawn.Reserve(this.CompostBin, this.job, 1, -1, null);
         }
+
         [DebuggerHidden]
         protected override IEnumerable<Toil> MakeNewToils()
         {
