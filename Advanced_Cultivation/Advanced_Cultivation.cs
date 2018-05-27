@@ -3,26 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
+using System.Diagnostics;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 using RimWorld;
 
 namespace Advanced_Cultivation
 {
+    [DefOf]
     public static class ThingDefOf
     {
         public static ThingDef AC_RawCompost;
         public static ThingDef AC_FermentedCompost;
+        public static ThingDef AC_CompostBin;
+        public static ThingDef AC_CompostBinRaw;
+        public static ThingDef AC_CompostBinFermented;
     }
 
+    [DefOf]
     public static class JobDefOf
     {
-        public static JobDef AC_HarvestCompostBin;
+        public static JobDef AC_EmptyCompostBin;
         public static JobDef AC_FillCompostBin;
     }
-
+    
     public class Building_AC_CompostBin : Building
     {
+        // These two are just to change the appearance of the building when it has items in it.
+        private Thing CompostBinRaw
+        {
+            get
+            {
+                return ThingMaker.MakeThing(ThingDefOf.AC_CompostBinRaw, null);
+            }
+        }
+
+        private Thing CompostBinFermented
+        {
+            get
+            {
+                return ThingMaker.MakeThing(ThingDefOf.AC_CompostBinFermented, null);
+            }
+        }
+
         private float progressInt;
         private int compostCount;
         private Material barFilledCachedMat;
@@ -263,9 +287,9 @@ namespace Advanced_Cultivation
             {
                 "AC.IdealTemp".Translate(),
                 ": ",
-                this.minFermentTemperature.ToStringTemperature("F0"),
+                Building_AC_CompostBin.minFermentTemperature.ToStringTemperature("F0"),
                 "-",
-                this.maxFermentTemperature.ToStringTemperature("F0")
+                Building_AC_CompostBin.maxFermentTemperature.ToStringTemperature("F0")
             }));
             return stringBuilder.ToString().TrimEndNewlines();
         }
@@ -304,19 +328,19 @@ namespace Advanced_Cultivation
             yield break;
         }
 
-        public override virtual void DrawAt(Vector3 drawLoc)
+        public override void DrawAt(Vector3 drawLoc, bool flip = false )
         {
             if (this.Empty)
             {
-                this.Graphic.Draw(drawLoc, 0, this, 0f);
+                this.Graphic.Draw(drawLoc, this.Rotation, this, 0f);
             }
             if (this.Progress < 1f)
             {
-                this.Graphic.Draw(drawLoc, 0, AC_CompostBinRaw, 0f);
+                this.Graphic.Draw(drawLoc, this.Rotation, this.CompostBinRaw, 0f);
             }
             else
             {
-                this.Graphic.Draw(drawLoc, 0, AC_CompostBinFermented, 0f);
+                this.Graphic.Draw(drawLoc, this.Rotation, this.CompostBinFermented, 0f);
             }
         }
 
@@ -400,13 +424,13 @@ namespace Advanced_Cultivation
         {
             Building_AC_CompostBin CompostBin = t as Building_AC_CompostBin;
             Thing t2 = this.FindCompost(pawn, CompostBin);
-            return new Job(JobDefOf.FillCompostBin, t, t2)
+            return new Job(JobDefOf.AC_FillCompostBin, t, t2)
             {
                 count = CompostBin.SpaceLeftForCompost
             };
         }
 
-        private Thing FindCompost(Pawn pawn, Building_CompostBin bin)
+        private Thing FindCompost(Pawn pawn, Building_AC_CompostBin bin)
         {
             Predicate<Thing> predicate = (Thing x) => !x.IsForbidden(pawn) && pawn.CanReserve(x, 1);
             Predicate<Thing> validator = predicate;
@@ -452,7 +476,7 @@ namespace Advanced_Cultivation
         }
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            return new Job(JobDefOf.EmptyCompostBin, t);
+            return new Job(JobDefOf.AC_EmptyCompostBin, t);
         }
     }
 
@@ -529,7 +553,7 @@ namespace Advanced_Cultivation
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
             this.FailOnBurningImmobile(TargetIndex.A);
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
-            yield return Toils_General.Wait(200).FailOnDestroyedNullOrForbidden(TargetIndex.A).FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch).FailOn(() => !this.Barrel.Distilled).WithProgressBarToilDelay(TargetIndex.A, false, -0.5f);
+            yield return Toils_General.Wait(200).FailOnDestroyedNullOrForbidden(TargetIndex.A).FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch).FailOn(() => !this.CompostBin.Fermented).WithProgressBarToilDelay(TargetIndex.A, false, -0.5f);
             yield return new Toil
             {
                 initAction = delegate {
