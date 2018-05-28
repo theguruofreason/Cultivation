@@ -1,38 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
     <ModMetaData>
-        <name>Simple Cultivation [B18]</name>
-        <author>MadWookie and Gasch</author>
+        <name>Advanced Cultivation [B18]</name>
+        <author>Gasch</author>
         <url></url>
         <targetVersion>0.18.0</targetVersion>
-        <description>A simple mod that adds the ability to cultivate soil.
-
-New Floor Types:
-
-Tilled Soil 
-    Has %110 fertility.
-    Requires the "Simple Cultivation" research.
-    Costs 1 Fertilizer to construct.
-
-Cultivated Soil 
-    Has %150 fertility.
-    Requires the "Cultivation" research.
-    Costs 5 Fertilizer to construct.
-	
-New Items:
-
-Compost
-    Requires the "Composting" research.
-	Costs .25 nutrition (~5 meat) per compost.
-	Can be crafted in batches of 10.
-    Craft at crafting spot or butcher table.
-
-Fertilizer
-    Requires the "Composting" research.
-    Costs 1 compost per fertilizer
-	Can be crafted in batches of 5.
-    Craft at a Butcher Table.
-
-Secret Link: http://imgur.com/ZeWUSkr.jpg
-
-Have an idea or suggestion? Feel free to leave it in the comments!</description>
+        <description>
+		Advanced Cultivation aims to diversify the farming experience in Rimworld.
+		</description>
 </ModMetaData>

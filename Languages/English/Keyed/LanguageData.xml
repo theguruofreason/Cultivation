@@ -5,11 +5,12 @@
 
   <AC.Progress>Progress:</AC.Progress>
   <AC.FullOfFermentedCompost>Tried to add raw compost to barrel full of fermented compost. Colonists should take out the fermented compost first.</AC.FullOfFermentedCompost>
-  <AC.ContainsRawCompost>Contains raw compost:</AC.ContainsRawCompost>
-  <AC.ContainsFermentedCompost>Contains fermented compost:</AC.ContainsFermentedCompost>
+  <AC.ContainsRawCompost>Contains raw compost: </AC.ContainsRawCompost>
+  <AC.ContainsFermentedCompost>Contains fermented compost: </AC.ContainsFermentedCompost>
   <AC.Fermented>Fermentation Complete!</AC.Fermented>
-  <AC.FermentationProgress>Composting progress:</AC.FermentationProgress>
-  <AC.OutOfTemp>Compost barrel out of ideal temperature:</AC.OutOfTemp>
+  <AC.FermentationProgress>Composting progress: </AC.FermentationProgress>
+  <AC.CompletesIn> completes in </AC.CompletesIn>
+  <AC.OutOfTemp>Compost barrel out of ideal temperature: </AC.OutOfTemp>
   <AC.Temp>Temperature</AC.Temp>
   <AC.IdealTemp>Ideal composting temp</AC.IdealTemp>
   <AC.NotReady>Tried to get fertilizer but it's not yet ready.</AC.NotReady>

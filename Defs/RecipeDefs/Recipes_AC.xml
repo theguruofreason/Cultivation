@@ -27,7 +27,7 @@
             </categories>
         </fixedIngredientFilter>
         <products>
-            <SC_Compost>1</SC_Compost>
+            <AC_RawCompost>1</AC_RawCompost>
         </products>
 		<researchPrerequisite>AC_Composting</researchPrerequisite>
         <workSpeedStat>CookSpeed</workSpeedStat>
@@ -67,7 +67,7 @@
             </categories>
         </fixedIngredientFilter>
         <products>
-            <SC_Compost>5</SC_Compost>
+            <AC_RawCompost>5</AC_RawCompost>
         </products>
 		<researchPrerequisite>AC_Composting</researchPrerequisite>
         <workSpeedStat>CookSpeed</workSpeedStat>
@@ -102,7 +102,6 @@
       <AC_Fertilizer>1</AC_Fertilizer>
     </products>
     <researchPrerequisite>AC_SimpleCultivation</researchPrerequisite>
-    <workSpeedStat>CookSpeed</workSpeedStat>
     <workAmount>300</workAmount>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_CookMeal</soundWorking>
@@ -142,7 +141,6 @@
       <AC_EnrichedFertilizer>1</AC_EnrichedFertilizer>
     </products>
     <researchPrerequisite>AC_AdvancedCultivation</researchPrerequisite>
-    <workSpeedStat>CookSpeed</workSpeedStat>
     <workAmount>350</workAmount>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_CookMeal</soundWorking>
@@ -181,7 +179,6 @@
       <AC_EnrichedFertilizer>1</AC_EnrichedFertilizer>
     </products>
     <researchPrerequisite>AC_MiraculousCultivation</researchPrerequisite>
-    <workSpeedStat>CookSpeed</workSpeedStat>
     <workAmount>450</workAmount>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_CookMeal</soundWorking>

@@ -2,13 +2,13 @@
 <Defs>
 
   <JobDef>
-    <defName>FillCompostBin</defName>
+    <defName>AC_FillCompostBin</defName>
     <driverClass>Advanced_Cultivation.JobDriver_FillCompostBin</driverClass>
     <reportString>filling TargetA with raw compost.</reportString>
   </JobDef>
 
   <JobDef>
-    <defName>EmptyCompostBin</defName>
+    <defName>AC_EmptyCompostBin</defName>
     <driverClass>Advanced_Cultivation.JobDriver_EmptyCompostBin</driverClass>
     <reportString>taking fermented compost out of TargetA.</reportString>
   </JobDef>

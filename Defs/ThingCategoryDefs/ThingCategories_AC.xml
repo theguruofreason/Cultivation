@@ -5,7 +5,7 @@
     <defName>AC_Fertilizer</defName>
     <label>fertilizer</label>
     <parent>ResourcesRaw</parent>
-    <iconPath>Textures/Fertilizer</iconPath>
+    <iconPath>Fertilizer</iconPath>
     <resourceReadoutRoot>true</resourceReadoutRoot>
   </ThingCategoryDef>
   

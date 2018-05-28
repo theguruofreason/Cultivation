@@ -139,7 +139,7 @@
 	<TerrainDef ParentName="AC_TerrainBase">
 		<defName>AC_SoilTilled</defName>
 		<label>tilled soil</label>
-		<description>Tilled soil with %90 fertility.</description>
+		<description>Tilled soil with %90 fertility. Note that this is lower than rich soil, and will reduce fertility!</description>
 		<texturePath>SoilTilled</texturePath>
 		<layerable>true</layerable>
 		<statBases>
@@ -148,31 +148,15 @@
 		</statBases>
 		<fertility>0.9</fertility>
 		<researchPrerequisites>
-      <li>Tilling</li>
+      <li>AC_Tilling</li>
     </researchPrerequisites>
-	</TerrainDef>
-
-	<TerrainDef ParentName="AC_TerrainBase">
-		<defName>AC_SoilCultivated</defName>
-		<label>cultivated soil</label>
-		<description>cultivated soil with %100 fertility.</description>
-		<texturePath>SoilCultivated</texturePath>
-		<costList>
-      <AC_FermentedCompost>2</AC_FermentedCompost>
- 		</costList>
-		<layerable>true</layerable>
-		<statBases>
-			<Beauty>1</Beauty>
-			<WorkToBuild>500</WorkToBuild>
-		</statBases>
-		<fertility>1.0</fertility>
 	</TerrainDef>
 
   <TerrainDef ParentName="AC_TerrainBase">
     <defName>AC_SoilFertilized</defName>
     <label>fertilized soil</label>
     <description>fertilized soil with %130 fertility.</description>
-    <texturePath>SoilCultivated</texturePath>
+    <texturePath>SoilFertilized</texturePath>
     <costList>
       <AC_Fertilizer>1</AC_Fertilizer>
     </costList>
@@ -188,7 +172,7 @@
     <defName>AC_SoilEnriched</defName>
     <label>enriched soil</label>
     <description>enriched soil with %150 fertility.</description>
-    <texturePath>SoilCultivated</texturePath>
+    <texturePath>SoilEnriched</texturePath>
     <costList>
       <AC_EnrichedFertilizer>1</AC_EnrichedFertilizer>
     </costList>
@@ -204,7 +188,7 @@
     <defName>AC_SoilMiracle</defName>
     <label>miracle soil</label>
     <description>miracle soil with %200 fertility.</description>
-    <texturePath>SoilCultivated</texturePath>
+    <texturePath>SoilMiracle</texturePath>
     <costList>
       <AC_MiracleFertilizer>1</AC_MiracleFertilizer>
     </costList>

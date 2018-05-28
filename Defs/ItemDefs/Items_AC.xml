@@ -9,10 +9,10 @@
     <altitudeLayer>Item</altitudeLayer>
     <alwaysHaulable>true</alwaysHaulable>
     <drawGUIOverlay>true</drawGUIOverlay>
-    <label>compost</label>
+    <label>raw compost</label>
     <description>Raw compost which needs to be fermented in a compost bin.</description>
     <graphicData>
-      <texPath>Compost</texPath>
+      <texPath>RawCompost</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <rotatable>false</rotatable>
@@ -42,7 +42,7 @@
     <label>fermented compost</label>
     <description>Fermented compost is used to make Fertilizer.</description>
     <graphicData>
-      <texPath>Compost</texPath>
+      <texPath>FermentedCompost</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <rotatable>false</rotatable>
@@ -97,7 +97,7 @@
     <label>enriched fertilizer</label>
     <description>Enriched fertilizer is used to make enriched soil for farming.</description>
     <graphicData>
-      <texPath>Fertilizer</texPath>
+      <texPath>EnrichedFertilizer</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <useHitPoints>true</useHitPoints>
@@ -114,7 +114,7 @@
     <label>miracle fertilizer</label>
     <description>Miracle fertilizer is used to make miracle soil for farming.</description>
     <graphicData>
-      <texPath>Fertilizer</texPath>
+      <texPath>MiracleFertilizer</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <useHitPoints>true</useHitPoints>
