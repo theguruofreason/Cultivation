@@ -12,7 +12,6 @@
       <li>ResourcesRaw</li>
     </thingCategories>
     <useHitPoints>true</useHitPoints>
-    
   </ThingDef>
 
   <ThingDef ParentName="AC_CompostBase">
