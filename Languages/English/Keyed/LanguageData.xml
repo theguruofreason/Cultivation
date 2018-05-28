@@ -16,5 +16,6 @@
   <AC.NotReady>Tried to get fertilizer but it's not yet ready.</AC.NotReady>
   <AC.BadTemp>Bad temperature</AC.BadTemp>
   <AC.NoRawCompost>Contains no raw compost</AC.NoRawCompost>
+  <AC.FermentProgress>Fermentation Progress: </AC.FermentProgress>
 
 </LanguageData>

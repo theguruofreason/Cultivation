@@ -1,63 +1,79 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <ThingDef>
-    <defName>AC_RawCompost</defName>
-    <thingClass>Thing</thingClass>
+  <ThingDef Name="AC_CompostBase" Abstract="True">
     <category>Item</category>
     <selectable>true</selectable>
     <altitudeLayer>Item</altitudeLayer>
     <alwaysHaulable>true</alwaysHaulable>
     <drawGUIOverlay>true</drawGUIOverlay>
+    <rotatable>false</rotatable>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <useHitPoints>true</useHitPoints>
+    
+  </ThingDef>
+
+  <ThingDef ParentName="AC_CompostBase">
+    <defName>AC_RawCompost</defName>
+    <thingClass>ThingWithComps</thingClass>
+    <tickerType>Normal</tickerType>
     <label>raw compost</label>
     <description>Raw compost which needs to be fermented in a compost bin.</description>
     <graphicData>
       <texPath>RawCompost</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <rotatable>false</rotatable>
-    <stackLimit>75</stackLimit>
-    <thingCategories>
-      <li>ResourcesRaw</li>
-    </thingCategories>
-    <useHitPoints>true</useHitPoints>
+    <stackLimit>50</stackLimit>
+    <ingestible>
+      <foodType>AnimalProduct</foodType>
+      <nutrition>0.02</nutrition>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>RawMeat_Eat</ingestSound>
+      <tasteThought>AteRawFood</tasteThought>
+      <preferability>DesperateOnly</preferability>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_FoodPoisoningChance">
+        <humanlikeOnly>false</humanlikeOnly>
+      </li>
+      <li Class="CompProperties_TemperatureRuinable">
+        <minSafeTemperature>10</minSafeTemperature>
+        <maxSafeTemperature>71</maxSafeTemperature>
+        <progressPerDegreePerTick>0.00003</progressPerDegreePerTick>
+      </li>
+      <li Class="Advanced_Cultivation.CompProperties_AC_Fermenter">
+        <fermenterDaystoFerment>0.1</fermenterDaystoFerment>
+      </li>
+    </comps>
     <statBases>
-      <MarketValue>1</MarketValue>
+      <MarketValue>3</MarketValue>
       <Mass>1.0</Mass>
       <MaxHitPoints>50</MaxHitPoints>
       <Flammability>1.0</Flammability>
-      <Beauty>-10</Beauty>
-      <Cleanliness>-5</Cleanliness>
+      <Beauty>-20</Beauty>
+      <Cleanliness>-15</Cleanliness>
     </statBases>
   </ThingDef>
 
-  <ThingDef>
+  <ThingDef ParentName="AC_CompostBase">
     <defName>AC_FermentedCompost</defName>
     <thingClass>Thing</thingClass>
-    <category>Item</category>
-    <selectable>true</selectable>
-    <altitudeLayer>Item</altitudeLayer>
-    <alwaysHaulable>true</alwaysHaulable>
-    <drawGUIOverlay>true</drawGUIOverlay>
     <label>fermented compost</label>
     <description>Fermented compost is used to make Fertilizer.</description>
     <graphicData>
       <texPath>FermentedCompost</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <rotatable>false</rotatable>
-    <stackLimit>75</stackLimit>
-    <thingCategories>
-      <li>ResourcesRaw</li>
-    </thingCategories>
-    <useHitPoints>true</useHitPoints>
+    <stackLimit>50</stackLimit>
     <statBases>
-      <MarketValue>1</MarketValue>
+      <MarketValue>8</MarketValue>
       <Mass>1.0</Mass>
       <MaxHitPoints>50</MaxHitPoints>
       <Flammability>2.0</Flammability>
-      <Beauty>-20</Beauty>
-      <Cleanliness>-20</Cleanliness>
+      <Beauty>-10</Beauty>
+      <Cleanliness>-10</Cleanliness>
     </statBases>
   </ThingDef>
 
