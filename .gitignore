@@ -1,6 +1,6 @@
 Textures/Orig
 *.dll
-Assemblies
 *.pbd
 *.cache
 *.orig
+!Assemblies/Advanced_Cultivation.dll
