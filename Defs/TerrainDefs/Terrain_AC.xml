@@ -166,7 +166,7 @@
       <Beauty>1</Beauty>
       <WorkToBuild>500</WorkToBuild>
     </statBases>
-    <fertility>1.3</fertility>
+    <fertility>1.2</fertility>
   </TerrainDef>
 
   <TerrainDef ParentName="AC_TerrainBase">
