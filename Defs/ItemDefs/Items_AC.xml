@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <ThingDef Name="AC_CompostBase" Abstract="True">
+  <ThingDef Name="AC_ResourceBase" Abstract="True">
     <category>Item</category>
     <selectable>true</selectable>
     <altitudeLayer>Item</altitudeLayer>
     <alwaysHaulable>true</alwaysHaulable>
     <drawGUIOverlay>true</drawGUIOverlay>
     <rotatable>false</rotatable>
+    <useHitPoints>true</useHitPoints>
+  </ThingDef>
+  
+  <ThingDef Name="AC_CompostBase" ParentName="AC_ResourceBase" Abstract="True">
     <thingCategories>
       <li>ResourcesRaw</li>
     </thingCategories>
-    <useHitPoints>true</useHitPoints>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
   </ThingDef>
 
   <ThingDef ParentName="AC_CompostBase">
@@ -19,7 +23,7 @@
     <thingClass>ThingWithComps</thingClass>
     <tickerType>Normal</tickerType>
     <label>raw compost</label>
-    <description>Raw compost which needs to be fermented in a compost bin.</description>
+    <description>Raw compost which needs to be fermented.</description>
     <graphicData>
       <texPath>RawCompost</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -27,7 +31,7 @@
     <stackLimit>50</stackLimit>
     <ingestible>
       <foodType>AnimalProduct</foodType>
-      <nutrition>0.02</nutrition>
+      <nutrition>0.05</nutrition>
       <ingestEffect>EatMeat</ingestEffect>
       <ingestSound>RawMeat_Eat</ingestSound>
       <tasteThought>AteRawFood</tasteThought>
@@ -43,7 +47,7 @@
         <progressPerDegreePerTick>0.00003</progressPerDegreePerTick>
       </li>
       <li Class="Advanced_Cultivation.CompProperties_AC_Fermenter">
-        <fermenterDaystoFerment>0.1</fermenterDaystoFerment>
+        <fermenterDaystoFerment>10</fermenterDaystoFerment>
       </li>
     </comps>
     <statBases>
@@ -76,19 +80,13 @@
     </statBases>
   </ThingDef>
 
-  <ThingDef Name="AC_FertilizerBase" Abstract="True">
+  <ThingDef Name="AC_FertilizerBase" ParentName="AC_ResourceBase" Abstract="True">
     <thingClass>Thing</thingClass>
-    <category>Item</category>
-    <selectable>true</selectable>
-    <altitudeLayer>Item</altitudeLayer>
-    <alwaysHaulable>true</alwaysHaulable>
-    <drawGUIOverlay>true</drawGUIOverlay>
-    <rotatable>false</rotatable>
     <stackLimit>15</stackLimit>
     <thingCategories>
       <li>AC_Fertilizer</li>
     </thingCategories>
-    <useHitPoints>true</useHitPoints>
+    <resourceReadoutPriority>First</resourceReadoutPriority>
   </ThingDef>
 
   <ThingDef ParentName="AC_FertilizerBase">
@@ -115,7 +113,6 @@
       <texPath>EnrichedFertilizer</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>18</MarketValue>
       <Mass>5.0</Mass>
@@ -132,7 +129,6 @@
       <texPath>MiracleFertilizer</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>30</MarketValue>
       <Mass>5.0</Mass>

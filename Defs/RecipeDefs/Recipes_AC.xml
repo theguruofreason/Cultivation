@@ -8,7 +8,6 @@
         <jobString>Gathering materials to compost.</jobString>
         <allowMixingIngredients>true</allowMixingIngredients>
         <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
-		<requiredGiverWorkType>Cooking</requiredGiverWorkType>
         <ingredients>
           <li>
             <filter>
@@ -48,7 +47,6 @@
         <jobString>Gathering materials to compost.</jobString>
         <allowMixingIngredients>true</allowMixingIngredients>
         <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
-		<requiredGiverWorkType>Cooking</requiredGiverWorkType>
         <ingredients>
           <li>
             <filter>
@@ -86,8 +84,8 @@
     <label>make fertilizer</label>
     <description>Gather materials to make fertilizer.</description>
     <jobString>Gathering materials to make fertilizer.</jobString>
-    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <workSpeedStat>DrugProductionSpeed</workSpeedStat>
+    <requiredGiverWorkType>Crafting</requiredGiverWorkType>
     <ingredients>
       <li>
         <filter>
@@ -117,8 +115,8 @@
     <label>make enriched fertilizer</label>
     <description>Gather materials to make enriched fertilizer.</description>
     <jobString>Gathering materials to make enriched fertilizer.</jobString>
-    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <workSpeedStat>DrugProductionSpeed</workSpeedStat>
+    <requiredGiverWorkType>Crafting</requiredGiverWorkType>
     <ingredients>
       <li>
         <filter>
@@ -155,8 +153,8 @@
     <label>make miracle fertilizer</label>
     <description>Gather materials to make miracle fertilizer.</description>
     <jobString>Gathering materials to make miracle fertilizer.</jobString>
-    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <workSpeedStat>DrugProductionSpeed</workSpeedStat>
+    <requiredGiverWorkType>Crafting</requiredGiverWorkType>
     <ingredients>
       <li>
         <filter>
@@ -176,7 +174,7 @@
       </li>
     </ingredients>
     <products>
-      <AC_EnrichedFertilizer>1</AC_EnrichedFertilizer>
+      <AC_MiracleFertilizer>1</AC_MiracleFertilizer>
     </products>
     <researchPrerequisite>AC_MiraculousCultivation</researchPrerequisite>
     <workAmount>450</workAmount>

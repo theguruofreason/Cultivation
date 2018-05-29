@@ -39,6 +39,7 @@
     <baseCost>500</baseCost>
     <techLevel>Industrial</techLevel>
     <prerequisites>
+      <li>DrugProduction</li>
       <li>AC_SimpleCultivation</li>
     </prerequisites>
   </ResearchProjectDef>

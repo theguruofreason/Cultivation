@@ -26,5 +26,22 @@
 			<li>Manipulation</li>
 		</requiredCapacities>
 	</WorkGiverDef>
+
+  <WorkGiverDef>
+    <defName>DoBillsMakeFertilizer</defName>
+    <label>make fertilizer</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Crafting</workType>
+    <priorityInType>95</priorityInType>
+    <fixedBillGiverDefs>
+      <li>TableButcher</li>
+    </fixedBillGiverDefs>
+    <verb>craft</verb>
+    <gerund>making fertilizer at</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
   
 </Defs>

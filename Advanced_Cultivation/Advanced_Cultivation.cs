@@ -4,6 +4,7 @@ using System.Text;
 using System.Diagnostics;
 using UnityEngine;
 using Verse;
+using System.Linq;
 using Verse.AI;
 using RimWorld;
 
@@ -34,10 +35,12 @@ namespace Advanced_Cultivation
             this.compClass = typeof(AC_CompFermenter);
         }
     }
+
+    // Fermenter Comps //
     
     public class AC_CompFermenter : ThingComp
     {
-        private float fermentProgress;
+        public float fermentProgress;
 
         public CompProperties_AC_Fermenter Props
         {
@@ -87,7 +90,7 @@ namespace Advanced_Cultivation
             }
         }
 
-        public void Ferment()
+        public void Ferment() // Create Fermented Compost on tile
         {
             Thing thing = ThingMaker.MakeThing(this.Props.fermentedThing, null);
             thing.stackCount = this.parent.stackCount;
@@ -119,31 +122,32 @@ namespace Advanced_Cultivation
         }
     }
 
+    // AC_Buildings //
+
+    [StaticConstructorOnStartup]
     public class Building_AC_CompostBin : Building
     {
+        // Graphics stuff... //
+        [Unsaved]
+        public static Graphic compostBinEmpty = GraphicDatabase.Get<Graphic_Single>("CompostBin", ShaderDatabase.Cutout);
+        [Unsaved]
+        public static Graphic compostBinRaw = GraphicDatabase.Get<Graphic_Single>("CompostBinRaw", ShaderDatabase.Cutout);
+        [Unsaved]
+        public static Graphic compostBinFermented = GraphicDatabase.Get<Graphic_Single>("CompostBinFermented", ShaderDatabase.Cutout);
 
         private float progressInt;
         private int compostCount;
         private Material barFilledCachedMat;
+        private const int BaseFermentationDuration = 360000;
+        private bool fermentFlag = false;
         public const int Capacity = 25;
-        private const int BaseFermentationDuration = 600000;
         public const float minFermentTemperature = 10f;
-        public const float maxFermentTemperature = 50f;
+        public const float maxFermentTemperature = 71f;
         private static readonly Vector2 BarSize = new Vector2(0.55f, 0.1f);
         private static readonly Color BarZeroProgressColor = new Color(0.4f, 0.27f, 0.22f);
         private static readonly Color BarFermentedColor = new Color(1.0f, 0.8f, 0.3f);
         private static readonly Material BarUnfilledMat = SolidColorMaterials.SimpleSolidColorMaterial(
             new Color(0.3f, 0.3f, 0.3f), false);
-
-        private void SetGraphicDataTexPath(string texPath)
-        {
-            {
-                Log.Message($"{ThingID}.def.graphicData.texPath (before): {def.graphicData.texPath} ...");
-                Log.Message($"should become {texPath}.");
-                this.def.graphicData.texPath = texPath;
-                Log.Message($"{ThingID} now has texPath \"{this.def.graphicData.texPath}\".");
-            }
-        }
 
         public float Progress
         {
@@ -239,7 +243,7 @@ namespace Advanced_Cultivation
         {
             get
             {
-                return 5.55555555E-6f * this.CurrentTempProgressSpeedFactor;
+                return 2.777777778E-6f * this.CurrentTempProgressSpeedFactor;
             }
         }
 
@@ -252,6 +256,39 @@ namespace Advanced_Cultivation
             }
         }
 
+        public override Graphic Graphic
+        {
+            get
+            {
+                if (this.Empty)
+                {
+                    if (Building_AC_CompostBin.compostBinEmpty != null)
+                    {
+                        return Building_AC_CompostBin.compostBinEmpty;
+                    }
+                    Log.Warning(this.def + " has no graphic data for its empty state!");
+                }
+                if (!this.Fermented)
+                {
+                    if (Building_AC_CompostBin.compostBinRaw != null)
+                    {
+                        return Building_AC_CompostBin.compostBinRaw;
+                    }
+                    Log.Warning(this.def + " has no graphic data for its filled with raw compost state!");
+                }
+                if (Building_AC_CompostBin.compostBinFermented != null)
+                {
+                    return Building_AC_CompostBin.compostBinFermented;
+                }
+                if (Building_AC_CompostBin.compostBinFermented == null)
+                {
+                    Log.Warning(this.def + " has no graphic data for its filled with fermented compost state!");
+                }
+                Log.ErrorOnce("Couldn't retrieve proper graphic data for " + this.def + ".", 764532);
+                return BaseContent.BadGraphic;
+            }
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -261,28 +298,14 @@ namespace Advanced_Cultivation
 
         public override void TickRare()
         {
-            Log.Message($"{ThingID}: TickRare() started...");
             base.TickRare();
-
-            if (!this.Empty && !this.Fermented)
+            if (!this.Empty)
             {
                 this.Progress = Mathf.Min(this.Progress + 250f * this.ProgressPerTickAtCurrentTemp, 1f);
-                {
-                    Log.Message($"{this.ThingID}.def.graphicData.texPath (before): {this.def.graphicData.texPath} should become CompostBinRaw");
-                    this.SetGraphicDataTexPath("CompostBinRaw");
-                    Log.Message($"{this.ThingID}.def.graphicData.texPath (after): {this.def.graphicData.texPath}");
-                }
             }
-            if (this.Fermented && this.def.graphicData.texPath != "CompostBinFermented")
-            {
-                Log.Message($"{this.ThingID}.def.graphicData.texPath (before): {this.def.graphicData.texPath} should become CompostBinFermented");
-                this.SetGraphicDataTexPath("CompostBinFermented");
-                Log.Message($"{this.ThingID}.def.graphicData.texPath (after): {this.def.graphicData.texPath}");
-            }
-            Log.Message($"{ThingID}: TickRare() over...");
         }
 
-        public void AddCompost(int count)
+        public void AddCompost(int count, Thing addedCompost)
         {
             base.GetComp<CompTemperatureRuinable>().Reset();
             if (this.Fermented)
@@ -296,11 +319,10 @@ namespace Advanced_Cultivation
             {
                 return;
             }
-            this.Progress = GenMath.WeightedAverage(0f, (float)numToAdd, this.Progress, (float)this.compostCount);
+            float addedFermenterCompProgress = ((ThingWithComps)addedCompost).GetComp<AC_CompFermenter>().fermentProgress;
+            this.Progress = GenMath.WeightedAverage(this.Progress, (float)this.compostCount, addedFermenterCompProgress, (float)count);
             this.compostCount += numToAdd;
-            Log.Message($"{ThingID}: AddCompost() trying to change texPath: {this.def.graphicData.texPath}");
-            this.SetGraphicDataTexPath("CompostBinRaw");
-            Log.Message($"{ThingID}: texPath is now {this.def.graphicData.texPath}");
+            base.Map.mapDrawer.MapMeshDirty(base.Position, MapMeshFlag.Things);
         }
 
         protected override void ReceiveCompSignal(string signal)
@@ -313,9 +335,11 @@ namespace Advanced_Cultivation
 
         private void Reset()
         {
+            Log.Message($"{ThingID} reset.");
             this.compostCount = 0;
             this.Progress = 0f;
-            this.def.graphicData = ThingDefOf.AC_CompostBin.graphicData;
+            fermentFlag = false;
+            base.Map.mapDrawer.MapMeshDirty(base.Position, MapMeshFlag.Things);
         }
 
         public void AddCompost(Thing compost)
@@ -323,7 +347,7 @@ namespace Advanced_Cultivation
             int numToAdd = Mathf.Min(compost.stackCount, this.SpaceLeftForCompost);
             if (numToAdd > 0)
             {
-                this.AddCompost(numToAdd);
+                this.AddCompost(numToAdd, compost);
                 compost.SplitOff(numToAdd).Destroy(DestroyMode.Vanish);
             }
         }
@@ -439,6 +463,11 @@ namespace Advanced_Cultivation
 
         public override void Draw()
         {
+            if (this.Fermented && !this.fermentFlag)
+            {
+                this.fermentFlag = true;
+                base.Map.mapDrawer.MapMeshDirty(base.Position, MapMeshFlag.Things);
+            }
             base.Draw();
             Vector3 drawPos = this.DrawPos;
             drawPos.y += 0.1f;

@@ -130,6 +130,7 @@
 			<li>GrowSoil</li>
 			<li>Diggable</li>
 		</affordances>
+    <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
 		<avoidWander>true</avoidWander>
 		<terrainFilthDef>FilthDirt</terrainFilthDef>
 		<takeFootprints>True</takeFootprints>
