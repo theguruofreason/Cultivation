@@ -10,22 +10,11 @@
     <prerequisites></prerequisites>
   </ResearchProjectDef>
 
-	<ResearchProjectDef>
-		<defName>AC_Composting</defName>
-		<label>composting</label>
-		<description>Allows you to compost.</description>
-		<baseCost>200</baseCost>
-		<techLevel>Medieval</techLevel>
-		<prerequisites>
-      <li>AC_Tilling</li>
-    </prerequisites>
-	</ResearchProjectDef>
-
   <ResearchProjectDef>
     <defName>AC_SimpleCultivation</defName>
     <label>simple cultivation</label>
-    <description>Allows you to create fertilizer.</description>
-    <baseCost>300</baseCost>
+    <description>Allows you to compost and create fertilizer.</description>
+    <baseCost>500</baseCost>
     <techLevel>Medieval</techLevel>
     <prerequisites>
       <li>AC_Composting</li>

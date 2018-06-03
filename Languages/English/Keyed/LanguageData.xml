@@ -17,5 +17,10 @@
   <AC.BadTemp>Bad temperature</AC.BadTemp>
   <AC.NoRawCompost>Contains no raw compost</AC.NoRawCompost>
   <AC.FermentProgress>Fermentation Progress: </AC.FermentProgress>
+  
+  <!-- ===== Tilling ===== -->
+
+  <AC.CommandAllowTill>Allow tilling</AC.CommandAllowTill>
+  <AC.CommandAllowTillDesc>When enabled, colonists will till the land if it is not tilled or planted</AC.CommandAllowTillDesc>
 
 </LanguageData>

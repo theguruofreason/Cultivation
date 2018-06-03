@@ -39,7 +39,7 @@
     <designationCategory>Production</designationCategory>
     <constructEffect>ConstructWood</constructEffect>
     <researchPrerequisites>
-      <li>AC_Composting</li>
+      <li>AC_SimpleCultivation</li>
     </researchPrerequisites>
   </ThingDef>
   

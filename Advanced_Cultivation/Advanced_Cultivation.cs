@@ -4,12 +4,12 @@ using System.Text;
 using System.Diagnostics;
 using UnityEngine;
 using Verse;
-using System.Linq;
 using Verse.AI;
 using RimWorld;
 
 namespace Advanced_Cultivation
 {
+
     [DefOf]
     public static class ThingDefOf
     {

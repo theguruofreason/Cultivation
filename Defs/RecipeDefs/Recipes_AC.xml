@@ -28,7 +28,7 @@
         <products>
             <AC_RawCompost>1</AC_RawCompost>
         </products>
-		<researchPrerequisite>AC_Composting</researchPrerequisite>
+		<researchPrerequisite>AC_SimpleCultivation</researchPrerequisite>
         <workSpeedStat>CookSpeed</workSpeedStat>
 		<workAmount>250</workAmount>
         <effectWorking>Cook</effectWorking>
@@ -67,7 +67,7 @@
         <products>
             <AC_RawCompost>5</AC_RawCompost>
         </products>
-		<researchPrerequisite>AC_Composting</researchPrerequisite>
+		<researchPrerequisite>AC_SimpleCultivation</researchPrerequisite>
         <workSpeedStat>CookSpeed</workSpeedStat>
 		<workAmount>1250</workAmount>
         <effectWorking>Cook</effectWorking>

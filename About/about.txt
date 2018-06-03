@@ -1,0 +1,101 @@
+[center][size=20pt]Advanced Cultivation[/size][/center]
+
+[color=orange][size=18pt]Description:[/size][/color]
+Advanced Cultivation aims to diversify the farming experience in Rimworld. To this aim, soil has been reworked and composting and fertilizer have been introduced!
+
+[color=orange][b]Overwritten Vanilla Ground:[/b][/color]
+[list]
+[li]Soil
+[list][li]Fertility: %70[/li]
+[/list][/li][/list]
+[list]
+[li]Rich Soil
+[list][li]Fertility: %100[/li]
+[/list][/li][/list]
+[list]
+[li]Marshy Soil
+[list][li]Fertility: %50[/li]
+[li]Dries to: Rich Soil[/li]
+[/list][/li][/list]
+[list]
+[li]Gravel
+[list][li]Fertility: %45[/li]
+[/list][/li][/list]
+[list]
+[li]Lichen-Covered Dirt
+[list][li]Fertility: %70[/li]
+[/list][/li][/list]
+	
+[color=orange][b]New Ground Types:[/b][/color]
+[list]
+[li]Tilled Soil 
+[list]
+[li]Has %90 fertility[/li]
+[li]Requires the "Tilling" research[/li]
+[li]Only takes work to make![/li]
+[/list]
+[/li][/list]
+[list]
+[li]Fertilized Soil
+[list]
+[li]Has %120 fertility[/li]
+[li]Requires no research[/li]
+[li]Costs 1 Fertilizer to construct[/li]
+[/list][/li][/list]
+[list]
+[li]Enriched Soil
+[list][li]Has %150 fertility[/li]
+[li]Requires no research[/li]
+[li]Costs 1 Enriched Fertilizer to construct[/li]
+[/list][/li][/list]
+[list]
+[li]Miracle Soil
+[list][li]Has %200(!!!) fertility[/li]
+[li]Requires no research[/li]
+[li]Costs 1 Miracle Fertilizer to construct[/li]
+[/list][/li][/list]
+[color=orange][b]New Items:[/b][/color]
+[list]
+[li]Raw Compost
+[list][li]Requires the "Composting" research[/li]
+[li]Costs .25 nutrition (~5 meat) per compost[/li]
+[li]Can be crafted in batches of 5[/li]
+[li]Craft at crafting spot or butcher table[/li]
+[/list][/li][/list]
+[list]
+[li]Fermented Compost
+[list][li]Raw Compost naturally ferments over time (10 days by default)[/li]
+[li]Compost Bins allow compost to ferment faster (6 days by default)[/li]
+[/list][/li][/list]
+[list]
+[li]Fertilizer
+[list][li]Requires the "Simple Cultivation" research[/li]
+[li]Costs 5 fermented compost per fertilizer[/li]
+[li]Craft at a Butcher Table or Drug Lab[/li]
+[/list][/li][/list]
+[list]
+[li]Enriched Fertilizer
+[list][li]Requires the "Advanced Cultivation" research[/li]
+[li]Costs 7 fermented compost per fertilizer[/li]
+[li]Craft at a Drug Lab[/li]
+[/list][/li][/list]
+[list]
+[li]Miracle Fertilizer
+[list][li]Requires the "Miracle Cultivation" research[/li]
+[li]Costs 10 fermented compost per fertilizer[/li]
+[li]Craft at a Drug Lab[/li]
+[/list][/li][/list]
+If you don't like the increased difficulty from the soil changes, feel free to modify the Terrain_AC.xml.
+
+[color=orange][b]Conflicts[/b][/color]
+This mod alters vanilla ground objects (soil, rich soil, gravel, march, and lichen). Any mod loaded after it which alters these terrain will override these changes. Other than that, I don't anticipate any conflicts.
+
+[color=orange][size=18pt]Author/Mod Team[/size][/color]
+Gasch
+
+[color=orange][size=18pt]Download[/size][/color]
+Nexus Mods link: [url=https://www.nexusmods.com/rimworld/mods/251/][img]http://staticdelivery.nexusmods.com/images/101/1-1394454241.png[/img][/url]
+
+[color=orange][size=18pt]How to install:[/size][/color]
+- Unzip the contents and place them in your RimWorld/Mods folder.
+- Activate the mod in the mod menu in the game.
