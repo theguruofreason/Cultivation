@@ -27,8 +27,17 @@ namespace Advanced_Cultivation
 
     public class CompProperties_AC_Fermenter : CompProperties
     {
-        public float fermenterDaystoFerment = 1f;
+        public float daysToFerment = 1f;
         public ThingDef fermentedThing;
+        public float maxSafeTemp;
+        public float minSafeTemp;
+        public float maxFermentTemp;
+        public float minFermentTemp;
+        public float ruinProgressPerDegreePerTick;
+        public bool fermented = false;
+        public float heatPerSecondPerFermenter = 0.5f;
+        public float heatPushMinTemperature = -99999f;
+        public float heatPushMaxTemperature = 99999f;
 
         public CompProperties_AC_Fermenter()
         {
@@ -41,6 +50,7 @@ namespace Advanced_Cultivation
     public class AC_CompFermenter : ThingComp
     {
         public float fermentProgress;
+        public float ruinedPercent;
 
         public CompProperties_AC_Fermenter Props
         {
@@ -50,36 +60,118 @@ namespace Advanced_Cultivation
             }
         }
 
-        private CompTemperatureRuinable FreezerComp
+        public int fermenterCount
         {
             get
             {
-                return this.parent.GetComp<CompTemperatureRuinable>();
+                if (this.parent.GetType() == typeof(Building_AC_CompostBin))
+                {
+                    Building_AC_CompostBin compostBin = (Building_AC_CompostBin)this.parent;
+                    return compostBin.compostCount;
+                }
+                else
+                {
+                    return this.parent.stackCount;
+                }
             }
         }
 
-        public bool TemperatureDamaged
+        public bool Ruined
         {
             get
             {
-                CompTemperatureRuinable freezerComp = this.FreezerComp;
-                return freezerComp != null && this.FreezerComp.Ruined;
+                return this.ruinedPercent >= 1f;
             }
         }
 
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_Values.Look<float>(ref this.fermentProgress, "AC.FermentProgress".Translate(), 0f, false);
+            Scribe_Values.Look<float>(ref this.fermentProgress, "AC.FermentProgressSave".Translate(), 0f, false);
+        }
+
+        private float CurrentTempProgressSpeedFactor
+        {
+            get
+            {
+                float minFermentTemp = this.Props.minFermentTemp;
+                float maxFermentTemp = this.Props.maxFermentTemp;
+                float minSafeTemp = this.Props.minSafeTemp;
+                float maxSafeTemp = this.Props.maxSafeTemp;
+                float ambientTemperature = this.parent.AmbientTemperature;
+                if (ambientTemperature <= this.Props.minSafeTemp)
+                {
+                    return 0.0f;
+                }
+                if (ambientTemperature <= minFermentTemp)
+                {
+                    return GenMath.LerpDouble(this.Props.minSafeTemp,
+                        minFermentTemp,
+                        0.0f, 1f, ambientTemperature);
+                }
+                if (ambientTemperature <= maxFermentTemp)
+                {
+                    return 1.0f;
+                }
+                if (ambientTemperature <= maxSafeTemp)
+                {
+                    return GenMath.LerpDouble(maxFermentTemp,
+                        this.Props.maxSafeTemp,
+                        1f, 0.0f, ambientTemperature);
+                }
+                return 0.0f;
+            }
+        }
+
+        protected virtual bool ShouldPushHeatNow
+        {
+            get
+            {
+                if (this.parent.Map != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        private float FermentProgressPerTickAtCurrentTemp
+        {
+            get
+            {
+                return 1f / (this.Props.daysToFerment * 60000f) * this.CurrentTempProgressSpeedFactor;
+            }
         }
 
         public override void CompTick()
         {
-            if (!this.TemperatureDamaged)
+            this.DoTicks(1);
+        }
+        
+        public override void CompTickRare()
+        {
+            this.DoTicks(250);
+        }
+        
+        private void DoTicks(int ticks)
+        {
+            if (this.parent.IsHashIntervalTick(60) && this.ShouldPushHeatNow)
             {
-                float fermentPerTick = 1f / (this.Props.fermenterDaystoFerment * 60000f);
-                this.fermentProgress += fermentPerTick;
-                if (this.fermentProgress >= 1f)
+                CompProperties_AC_Fermenter props = this.Props;
+                float ambientTemperature = this.parent.AmbientTemperature;
+                if (ambientTemperature < props.heatPushMaxTemperature && ambientTemperature > props.heatPushMinTemperature)
+                {
+                    GenTemperature.PushHeat(this.parent.Position, this.parent.Map, props.heatPerSecondPerFermenter * this.fermenterCount);
+                }
+            }
+            if (!this.Ruined)
+            {
+                float fermentPerTick = 1f / (this.Props.daysToFerment * 60000f);
+                this.fermentProgress += fermentPerTick * ticks;
+                if (this.fermentProgress >= 1f && !this.Props.fermented)
                 {
                     this.Ferment();
                 }
@@ -88,14 +180,67 @@ namespace Advanced_Cultivation
             {
                 this.parent.Destroy(DestroyMode.Vanish);
             }
+            this.UpdateRuinedPercent(ticks);
         }
 
-        public void Ferment() // Create Fermented Compost on tile
+        private int EstimatedTicksLeft
         {
-            Thing thing = ThingMaker.MakeThing(this.Props.fermentedThing, null);
-            thing.stackCount = this.parent.stackCount;
-            GenSpawn.Spawn(thing, parent.Position, parent.Map);
-            this.parent.Destroy(DestroyMode.Vanish);
+            get
+            {
+                return Mathf.Max(Mathf.RoundToInt((1f - this.fermentProgress) /
+                    this.FermentProgressPerTickAtCurrentTemp), 0);
+            }
+        }
+
+        public void Reset()
+        {
+            this.ruinedPercent = 0f;
+        }
+        
+        private void UpdateRuinedPercent(int ticks)
+        {
+            if (!this.Ruined)
+            {
+                float ambientTemperature = this.parent.AmbientTemperature;
+                if (ambientTemperature > this.Props.maxSafeTemp)
+                {
+                    this.ruinedPercent += (ambientTemperature - this.Props.maxSafeTemp) * this.Props.ruinProgressPerDegreePerTick * (float)ticks;
+                }
+                else if (this.Props.minSafeTemp > ambientTemperature)
+                {
+                    this.ruinedPercent += (this.Props.minSafeTemp - ambientTemperature) * this.Props.ruinProgressPerDegreePerTick * (float)ticks;
+                }
+                else
+                {
+                    float averageSafeTemp = (this.Props.minSafeTemp + this.Props.maxSafeTemp) / 2;
+                    this.ruinedPercent -= (averageSafeTemp / Math.Max(Math.Abs(averageSafeTemp - ambientTemperature), 5)) * this.Props.ruinProgressPerDegreePerTick * (float)ticks;
+                }
+                if (this.ruinedPercent >= 1f)
+                {
+                    this.ruinedPercent = 1f;
+                    this.parent.BroadcastCompSignal("RuinedByTemperature");
+                }
+                else if (this.ruinedPercent < 0f)
+                {
+                    this.Reset();
+                }
+            }
+        }
+
+        public void Ferment() // Create Fermented Compost on tile if this.parent is raw_compost
+        {
+            this.Props.fermented = true;
+            if (this.parent.GetType() == typeof(Building_AC_CompostBin))
+            {
+                return;
+            }
+            else
+            {
+                Thing thing = ThingMaker.MakeThing(this.Props.fermentedThing, null);
+                thing.stackCount = this.parent.stackCount;
+                GenSpawn.Spawn(thing, parent.Position, parent.Map);
+                this.parent.Destroy(DestroyMode.Vanish);
+            }
         }
 
         public override void PreAbsorbStack(Thing otherStack, int count)
@@ -103,22 +248,67 @@ namespace Advanced_Cultivation
             float t = (float)count / (float)(this.parent.stackCount + count);
             AC_CompFermenter comp = ((ThingWithComps)otherStack).GetComp<AC_CompFermenter>();
             float b = comp.fermentProgress;
+            this.ruinedPercent = Mathf.Lerp(this.ruinedPercent, comp.ruinedPercent, t);
             this.fermentProgress = Mathf.Lerp(this.fermentProgress, b, t);
+        }
+        
+        public override bool AllowStackWith(Thing other)
+        {
+            AC_CompFermenter comp = ((ThingWithComps)other).GetComp<AC_CompFermenter>();
+            return this.Ruined == comp.Ruined;
         }
 
         public override void PostSplitOff(Thing piece)
         {
             AC_CompFermenter comp = ((ThingWithComps)piece).GetComp<AC_CompFermenter>();
             comp.fermentProgress = this.fermentProgress;
+            comp.ruinedPercent = this.ruinedPercent;
         }
 
         public override string CompInspectStringExtra()
         {
-            if (!this.TemperatureDamaged)
+            if (this.Ruined)
             {
-                return "AC.FermentProgress".Translate() + this.fermentProgress.ToStringPercent();
+                return "RuinedByTemperature".Translate();
             }
-            return null;
+            StringBuilder stringBuilder = new StringBuilder();
+            if (this.ruinedPercent > 0f)
+            {
+                float ambientTemperature = this.parent.AmbientTemperature;
+                if (ambientTemperature > this.Props.maxSafeTemp)
+                {
+                    stringBuilder.AppendLine(string.Concat(new string[]
+                        { "Overheating".Translate(),
+                        ": ",
+                        this.ruinedPercent.ToStringPercent() }));
+            }
+                else if (ambientTemperature <= this.Props.minSafeTemp)
+                {
+                    stringBuilder.AppendLine(string.Concat(new string[]
+                        { "Freezing".Translate(),
+                        ": ",
+                        this.ruinedPercent.ToStringPercent() }));
+                }
+                else
+                {
+                    stringBuilder.AppendLine(string.Concat(new string[]
+                        {
+                        "AC.Recovering".Translate(),
+                        ": ",
+                        this.ruinedPercent.ToStringPercent()
+                        }));
+                }
+            }
+            if (!this.Ruined)
+            {
+                stringBuilder.AppendLine(string.Concat(new string[]
+                    {
+                "AC.FermentProgress".Translate() + ": " + this.fermentProgress.ToStringPercent(),
+                       "AC.CompletesIn".Translate(),
+                        this.EstimatedTicksLeft.ToStringTicksToPeriod(true, false, true)
+                    }));
+            }
+            return stringBuilder.ToString().TrimEndNewlines();
         }
     }
 
@@ -134,15 +324,12 @@ namespace Advanced_Cultivation
         public static Graphic compostBinRaw = GraphicDatabase.Get<Graphic_Single>("CompostBinRaw", ShaderDatabase.Cutout);
         [Unsaved]
         public static Graphic compostBinFermented = GraphicDatabase.Get<Graphic_Single>("CompostBinFermented", ShaderDatabase.Cutout);
-
-        private float progressInt;
-        private int compostCount;
+        
+        public int compostCount;
         private Material barFilledCachedMat;
         private const int BaseFermentationDuration = 360000;
         private bool fermentFlag = false;
         public const int Capacity = 25;
-        public const float minFermentTemperature = 10f;
-        public const float maxFermentTemperature = 71f;
         private static readonly Vector2 BarSize = new Vector2(0.55f, 0.1f);
         private static readonly Color BarZeroProgressColor = new Color(0.4f, 0.27f, 0.22f);
         private static readonly Color BarFermentedColor = new Color(1.0f, 0.8f, 0.3f);
@@ -153,15 +340,17 @@ namespace Advanced_Cultivation
         {
             get
             {
-                return this.progressInt;
+                AC_CompFermenter comp = base.GetComp<AC_CompFermenter>();
+                return comp.fermentProgress;
             }
             set
             {
-                if (value == this.progressInt)
+                AC_CompFermenter comp = base.GetComp<AC_CompFermenter>();
+                if (value == this.Progress)
                 {
                     return;
                 }
-                this.progressInt = value;
+                comp.fermentProgress = value;
                 this.barFilledCachedMat = null;
             }
         }
@@ -208,54 +397,6 @@ namespace Advanced_Cultivation
             }
         }
 
-        private float CurrentTempProgressSpeedFactor
-        {
-            get
-            {
-                CompProperties_TemperatureRuinable compProperties =
-                    this.def.GetCompProperties<CompProperties_TemperatureRuinable>();
-                float ambientTemperature = base.AmbientTemperature;
-                if (ambientTemperature <= compProperties.minSafeTemperature)
-                {
-                    return 0.0f;
-                }
-                if (ambientTemperature <= Building_AC_CompostBin.minFermentTemperature)
-                {
-                    return GenMath.LerpDouble(compProperties.minSafeTemperature,
-                        Building_AC_CompostBin.minFermentTemperature,
-                        0.0f, 1f, ambientTemperature);
-                }
-                if (ambientTemperature <= Building_AC_CompostBin.maxFermentTemperature)
-                {
-                    return 1.0f;
-                }
-                if (ambientTemperature <= compProperties.maxSafeTemperature)
-                {
-                    return GenMath.LerpDouble(Building_AC_CompostBin.maxFermentTemperature,
-                        compProperties.maxSafeTemperature,
-                        1f, 0.0f, ambientTemperature);
-                }
-                return 0.0f;
-            }
-        }
-
-        private float ProgressPerTickAtCurrentTemp
-        {
-            get
-            {
-                return 2.777777778E-6f * this.CurrentTempProgressSpeedFactor;
-            }
-        }
-
-        private int EstimatedTicksLeft
-        {
-            get
-            {
-                return Mathf.Max(Mathf.RoundToInt((1f - this.Progress) /
-                    this.ProgressPerTickAtCurrentTemp), 0);
-            }
-        }
-
         public override Graphic Graphic
         {
             get
@@ -293,21 +434,11 @@ namespace Advanced_Cultivation
         {
             base.ExposeData();
             Scribe_Values.Look<int>(ref this.compostCount, "compostCount", 0, false);
-            Scribe_Values.Look<float>(ref this.progressInt, "progress", 0, false);
-        }
-
-        public override void TickRare()
-        {
-            base.TickRare();
-            if (!this.Empty)
-            {
-                this.Progress = Mathf.Min(this.Progress + 250f * this.ProgressPerTickAtCurrentTemp, 1f);
-            }
         }
 
         public void AddCompost(int count, Thing addedCompost)
         {
-            base.GetComp<CompTemperatureRuinable>().Reset();
+            base.GetComp<AC_CompFermenter>().Reset();
             if (this.Fermented)
             {
                 Log.Warning("Tried to add compost to a bin with fermented compost in it. " +
@@ -354,15 +485,15 @@ namespace Advanced_Cultivation
 
         public override string GetInspectString()
         {
-            CompProperties_TemperatureRuinable compProperties =
-                this.def.GetCompProperties<CompProperties_TemperatureRuinable>();
+            CompProperties_AC_Fermenter compProperties =
+                this.def.GetCompProperties<CompProperties_AC_Fermenter>();
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(base.GetInspectString());
             if (stringBuilder.Length != 0)
             {
                 stringBuilder.AppendLine();
             }
-            CompTemperatureRuinable comp = base.GetComp<CompTemperatureRuinable>();
+            AC_CompFermenter comp = base.GetComp<AC_CompFermenter>();
             if (!this.Empty && !comp.Ruined)
             {
                 if (this.Fermented)
@@ -370,6 +501,7 @@ namespace Advanced_Cultivation
                     stringBuilder.AppendLine(string.Concat(new string[]
                         {
                         "AC.ContainsFermentedCompost".Translate(),
+                        ": ",
                         this.compostCount.ToString(),
                         " / ",
                         Building_AC_CompostBin.Capacity.ToString()
@@ -380,38 +512,11 @@ namespace Advanced_Cultivation
                     stringBuilder.AppendLine(string.Concat(new string[]
                         {
                         "AC.ContainsRawCompost".Translate(),
+                        ": ",
                         this.compostCount.ToString(),
                         " / ",
                         Building_AC_CompostBin.Capacity.ToString()
                         }));
-                }
-            }
-            if (!this.Empty)
-            {
-                if (this.Fermented)
-                {
-                    stringBuilder.AppendLine("AC.Fermented".Translate());
-                }
-                else
-                {
-                    stringBuilder.AppendLine(string.Concat(new string[]
-                        {
-                        "AC.FermentationProgress".Translate(),
-                        this.Progress.ToStringPercent(),
-                        "AC.CompletesIn".Translate(),
-                        this.EstimatedTicksLeft.ToStringTicksToPeriod(true, false, true)
-                        }));
-                    if (this.CurrentTempProgressSpeedFactor != 1f)
-                    {
-                        stringBuilder.AppendLine(string.Concat(new string[]
-                            {
-                            "AC.OutOfTemp".Translate(),
-                            this.CurrentTempProgressSpeedFactor.ToStringPercent()
-                            }));
-                    }
-                }
-                if (comp.Ruined)
-                {
                 }
             }
             stringBuilder.AppendLine("AC.Temp".Translate() + ": " +
@@ -420,9 +525,9 @@ namespace Advanced_Cultivation
             {
                 "AC.IdealTemp".Translate(),
                 ": ",
-                Building_AC_CompostBin.minFermentTemperature.ToStringTemperature("F0"),
+                compProperties.minFermentTemp.ToStringTemperature("F0"),
                 "-",
-                Building_AC_CompostBin.maxFermentTemperature.ToStringTemperature("F0")
+                compProperties.maxFermentTemp.ToStringTemperature("F0")
             }));
             return stringBuilder.ToString().TrimEndNewlines();
         }
@@ -519,8 +624,8 @@ namespace Advanced_Cultivation
                 return false;
             }
             float temperature = CompostBin.Position.GetTemperature(CompostBin.Map);
-            CompProperties_TemperatureRuinable compProperties = CompostBin.def.GetCompProperties<CompProperties_TemperatureRuinable>();
-            if (temperature < compProperties.minSafeTemperature || temperature > compProperties.maxSafeTemperature)
+            CompProperties_AC_Fermenter compProperties = CompostBin.def.GetCompProperties<CompProperties_AC_Fermenter>();
+            if (temperature < compProperties.minSafeTemp || temperature > compProperties.maxSafeTemp)
             {
                 JobFailReason.Is(WorkGiver_FillCompostBin.TemperatureTrans);
                 return false;

@@ -2,6 +2,7 @@
 <Defs>
 
   <ThingDef Name="AC_ResourceBase" Abstract="True">
+    <thingClass>ThingWithComps</thingClass>
     <category>Item</category>
     <selectable>true</selectable>
     <altitudeLayer>Item</altitudeLayer>
@@ -9,6 +10,9 @@
     <drawGUIOverlay>true</drawGUIOverlay>
     <rotatable>false</rotatable>
     <useHitPoints>true</useHitPoints>
+    <comps>
+      <li Class="compProperties_Forbiddable"/>
+    </comps>
   </ThingDef>
   
   <ThingDef Name="AC_CompostBase" ParentName="AC_ResourceBase" Abstract="True">
@@ -20,7 +24,6 @@
 
   <ThingDef ParentName="AC_CompostBase">
     <defName>AC_RawCompost</defName>
-    <thingClass>ThingWithComps</thingClass>
     <tickerType>Normal</tickerType>
     <label>raw compost</label>
     <description>Raw compost which needs to be fermented.</description>
@@ -41,13 +44,13 @@
       <li Class="CompProperties_FoodPoisoningChance">
         <humanlikeOnly>false</humanlikeOnly>
       </li>
-      <li Class="CompProperties_TemperatureRuinable">
-        <minSafeTemperature>10</minSafeTemperature>
-        <maxSafeTemperature>71</maxSafeTemperature>
-        <progressPerDegreePerTick>0.00003</progressPerDegreePerTick>
-      </li>
       <li Class="Advanced_Cultivation.CompProperties_AC_Fermenter">
-        <fermenterDaystoFerment>10</fermenterDaystoFerment>
+        <daysToFerment>10</daysToFerment>
+        <minSafeTemp>0</minSafeTemp>
+        <maxSafeTemp>80</maxSafeTemp>
+        <minFermentTemp>10</minFermentTemp>
+        <maxFermentTemp>70</maxFermentTemp>
+        <ruinProgressPerDegreePerTick>0.00003</ruinProgressPerDegreePerTick>
       </li>
     </comps>
     <statBases>
@@ -62,7 +65,6 @@
 
   <ThingDef ParentName="AC_CompostBase">
     <defName>AC_FermentedCompost</defName>
-    <thingClass>Thing</thingClass>
     <label>fermented compost</label>
     <description>Fermented compost is used to make Fertilizer.</description>
     <graphicData>
@@ -81,7 +83,6 @@
   </ThingDef>
 
   <ThingDef Name="AC_FertilizerBase" ParentName="AC_ResourceBase" Abstract="True">
-    <thingClass>Thing</thingClass>
     <stackLimit>15</stackLimit>
     <thingCategories>
       <li>AC_Fertilizer</li>

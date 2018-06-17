@@ -119,7 +119,7 @@
 
   <!-- New Terrain -->
 	<TerrainDef Name="AC_TerrainBase" Abstract="True">
-		<edgeType>FadeRough</edgeType>
+		<edgeType>Hard</edgeType>
 		<renderPrecedence>335</renderPrecedence>
 		<designationCategory>Floors</designationCategory>
 		<constructEffect>ConstructDirt</constructEffect>
