@@ -4,7 +4,6 @@ using System.Text;
 using System.Diagnostics;
 using UnityEngine;
 using Verse;
-using System.Linq;
 using Verse.AI;
 using RimWorld;
 
@@ -24,6 +23,8 @@ namespace Advanced_Cultivation
         public static JobDef AC_EmptyCompostBin;
         public static JobDef AC_FillCompostBin;
     }
+
+    // Fermenter CompProperties //
 
     public class CompProperties_AC_Fermenter : CompProperties
     {
@@ -45,7 +46,7 @@ namespace Advanced_Cultivation
         }
     }
 
-    // Fermenter Comps //
+    // Fermenter Comp //
     
     public class AC_CompFermenter : ThingComp
     {
@@ -60,7 +61,7 @@ namespace Advanced_Cultivation
             }
         }
 
-        public int fermenterCount
+        public int FermenterCount
         {
             get
             {
@@ -164,7 +165,7 @@ namespace Advanced_Cultivation
                 float ambientTemperature = this.parent.AmbientTemperature;
                 if (ambientTemperature < props.heatPushMaxTemperature && ambientTemperature > props.heatPushMinTemperature)
                 {
-                    GenTemperature.PushHeat(this.parent.Position, this.parent.Map, props.heatPerSecondPerFermenter * this.fermenterCount);
+                    GenTemperature.PushHeat(this.parent.Position, this.parent.Map, props.heatPerSecondPerFermenter * this.FermenterCount);
                 }
             }
             if (!this.Ruined)
@@ -305,7 +306,7 @@ namespace Advanced_Cultivation
                     {
                 "AC.FermentProgress".Translate() + ": " + this.fermentProgress.ToStringPercent(),
                        "AC.CompletesIn".Translate(),
-                        this.EstimatedTicksLeft.ToStringTicksToPeriod(true, false, true)
+                        this.EstimatedTicksLeft.ToStringTicksToPeriod()
                     }));
             }
             return stringBuilder.ToString().TrimEndNewlines();
@@ -317,7 +318,7 @@ namespace Advanced_Cultivation
     [StaticConstructorOnStartup]
     public class Building_AC_CompostBin : Building
     {
-        // Graphics stuff... //
+        // Graphics stuff //
         [Unsaved]
         public static Graphic compostBinEmpty = GraphicDatabase.Get<Graphic_Single>("CompostBin", ShaderDatabase.Cutout);
         [Unsaved]
@@ -729,10 +730,10 @@ namespace Advanced_Cultivation
             }
         }
 
-        public override bool TryMakePreToilReservations()
+        public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            return this.pawn.Reserve(this.CompostBin, this.job, 1, -1, null) &&
-                this.pawn.Reserve(this.RawCompost, this.job, 1, -1, null);
+            return this.pawn.Reserve(this.CompostBin, this.job, 1, -1, null, errorOnFailed) &&
+                this.pawn.Reserve(this.RawCompost, this.job, 1, -1, null, errorOnFailed);
         }
 
         [DebuggerHidden]
@@ -779,9 +780,9 @@ namespace Advanced_Cultivation
             }
         }
 
-        public override bool TryMakePreToilReservations()
+        public override bool TryMakePreToilReservations(bool errorOnFail)
         {
-            return this.pawn.Reserve(this.CompostBin, this.job, 1, -1, null);
+            return this.pawn.Reserve(this.CompostBin, this.job, 1, -1, null, errorOnFail);
         }
 
         [DebuggerHidden]
@@ -796,9 +797,8 @@ namespace Advanced_Cultivation
                 initAction = delegate {
                     Thing thing = this.CompostBin.TakeOutCompost();
                     GenPlace.TryPlaceThing(thing, this.pawn.Position, this.Map, ThingPlaceMode.Near, null);
-                    StoragePriority currentPriority = HaulAIUtility.StoragePriorityAtFor(thing.Position, thing);
-                    IntVec3 c;
-                    if (StoreUtility.TryFindBestBetterStoreCellFor(thing, this.pawn, this.Map, currentPriority, this.pawn.Faction, out c, true))
+                    StoragePriority currentPriority = StoreUtility.StoragePriorityAtFor(thing.Position, thing);
+                    if (StoreUtility.TryFindBestBetterStoreCellFor(thing, this.pawn, this.Map, currentPriority, this.pawn.Faction, out IntVec3 c, true))
                     {
                         this.job.SetTarget(TargetIndex.C, c);
                         this.job.SetTarget(TargetIndex.B, thing);

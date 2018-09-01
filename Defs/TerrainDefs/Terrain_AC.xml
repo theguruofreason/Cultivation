@@ -16,13 +16,24 @@
     <scatterType>Rocky</scatterType>
     <affordances>
       <li>Light</li>
+      <li>Medium</li>
       <li>Heavy</li>
       <li>GrowSoil</li>
       <li>Diggable</li>
     </affordances>
-    <terrainFilthDef>FilthDirt</terrainFilthDef>
+    <generatedFilth>Filth_Dirt</generatedFilth>
     <fertility>0.7</fertility>
     <takeFootprints>True</takeFootprints>
+    <tools>
+      <li>
+        <label>dirt</label>
+        <capacities>
+          <li>KickMaterialInEyes</li>
+        </capacities>
+        <hediff>DirtInEyes</hediff>
+        <cooldownTime>1.5</cooldownTime>
+      </li>
+    </tools>
   </TerrainDef>
 
   <TerrainDef>
@@ -41,11 +52,22 @@
       <li>Light</li>
       <li>GrowSoil</li>
       <li>Diggable</li>
+      <li>Bridgeable</li>
     </affordances>
-    <terrainFilthDef>FilthDirt</terrainFilthDef>
+    <generatedFilth>Filth_Dirt</generatedFilth>
     <fertility>0.5</fertility>
     <takeFootprints>True</takeFootprints>
     <driesTo>SoilRich</driesTo>
+    <tools>
+      <li>
+        <label>mud</label>
+        <capacities>
+          <li>KickMaterialInEyes</li>
+        </capacities>
+        <hediff>MudInEyes</hediff>
+        <cooldownTime>1.5</cooldownTime>
+      </li>
+    </tools>
   </TerrainDef>
 
   <TerrainDef>
@@ -61,13 +83,24 @@
     </statBases>
     <affordances>
       <li>Light</li>
+      <li>Medium</li>
       <li>Heavy</li>
       <li>GrowSoil</li>
       <li>Diggable</li>
     </affordances>
-    <terrainFilthDef>FilthDirt</terrainFilthDef>
+    <generatedFilth>Filth_Dirt</generatedFilth>
     <fertility>1.0</fertility>
     <takeFootprints>True</takeFootprints>
+    <tools>
+      <li>
+        <label>dirt</label>
+        <capacities>
+          <li>KickMaterialInEyes</li>
+        </capacities>
+        <hediff>DirtInEyes</hediff>
+        <cooldownTime>1.5</cooldownTime>
+      </li>
+    </tools>
   </TerrainDef>
 
   <TerrainDef>
@@ -84,13 +117,24 @@
     <scatterType>Rocky</scatterType>
     <affordances>
       <li>Light</li>
+      <li>Medium</li>
       <li>Heavy</li>
       <li>GrowSoil</li>
       <li>Diggable</li>
     </affordances>
-    <terrainFilthDef>FilthDirt</terrainFilthDef>
+    <generatedFilth>Filth_Dirt</generatedFilth>
     <fertility>0.45</fertility>
     <takeFootprints>True</takeFootprints>
+    <tools>
+      <li>
+        <label>gravel</label>
+        <capacities>
+          <li>KickMaterialInEyes</li>
+        </capacities>
+        <hediff>GravelInEyes</hediff>
+        <cooldownTime>1.5</cooldownTime>
+      </li>
+    </tools>
   </TerrainDef>
 
   <TerrainDef>
@@ -104,9 +148,10 @@
       <Beauty>-1</Beauty>
       <Cleanliness>-1</Cleanliness>
     </statBases>
-    <terrainFilthDef>FilthDirt</terrainFilthDef>
+    <generatedFilth>Filth_Dirt</generatedFilth>
     <affordances>
       <li>Light</li>
+      <li>Medium</li>
       <li>Heavy</li>
       <li>GrowSoil</li>
       <li>Diggable</li>
@@ -126,15 +171,26 @@
 		<pathCost>5</pathCost>
 		<affordances>
 			<li>Light</li>
+      <li>Medium</li>
 			<li>Heavy</li>
 			<li>GrowSoil</li>
 			<li>Diggable</li>
 		</affordances>
     <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
 		<avoidWander>true</avoidWander>
-		<terrainFilthDef>FilthDirt</terrainFilthDef>
+    <generatedFilth>Filth_Dirt</generatedFilth>
 		<takeFootprints>True</takeFootprints>
 		<terrainAffordanceNeeded>GrowSoil</terrainAffordanceNeeded>
+    <tools>
+      <li>
+        <label>dirt</label>
+        <capacities>
+          <li>KickMaterialInEyes</li>
+        </capacities>
+        <hediff>DirtInEyes</hediff>
+        <cooldownTime>1.5</cooldownTime>
+      </li>
+    </tools>
 	</TerrainDef>
 
 	<TerrainDef ParentName="AC_TerrainBase">

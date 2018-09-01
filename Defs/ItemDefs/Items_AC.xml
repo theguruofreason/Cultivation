@@ -34,16 +34,12 @@
     <stackLimit>50</stackLimit>
     <ingestible>
       <foodType>AnimalProduct</foodType>
-      <nutrition>0.05</nutrition>
       <ingestEffect>EatMeat</ingestEffect>
       <ingestSound>RawMeat_Eat</ingestSound>
       <tasteThought>AteRawFood</tasteThought>
       <preferability>DesperateOnly</preferability>
     </ingestible>
     <comps>
-      <li Class="CompProperties_FoodPoisoningChance">
-        <humanlikeOnly>false</humanlikeOnly>
-      </li>
       <li Class="Advanced_Cultivation.CompProperties_AC_Fermenter">
         <daysToFerment>10</daysToFerment>
         <minSafeTemp>0</minSafeTemp>
@@ -54,7 +50,10 @@
       </li>
     </comps>
     <statBases>
+      <Nutrition>0.05</Nutrition>
       <MarketValue>3</MarketValue>
+      <FoodPoisonChanceFixedHuman>0.95</FoodPoisonChanceFixedHuman>
+      <FoodPoisonChance>0.7</FoodPoisonChance>
       <Mass>1.0</Mass>
       <MaxHitPoints>50</MaxHitPoints>
       <Flammability>1.0</Flammability>
