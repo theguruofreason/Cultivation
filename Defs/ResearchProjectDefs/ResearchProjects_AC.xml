@@ -7,18 +7,20 @@
     <description>Allows you to till soil.</description>
     <baseCost>200</baseCost>
     <techLevel>Medieval</techLevel>
+	<tab>Cultivation</tab>
     <prerequisites></prerequisites>
   </ResearchProjectDef>
 
 	<ResearchProjectDef>
-		<defName>AC_Composting</defName>
-		<label>composting</label>
-		<description>Allows you to compost.</description>
-		<baseCost>200</baseCost>
-		<techLevel>Medieval</techLevel>
-		<prerequisites>
-      <li>AC_Tilling</li>
-    </prerequisites>
+	  <defName>AC_Composting</defName>
+	  <label>composting</label>
+	  <description>Allows you to compost.</description>
+	  <baseCost>200</baseCost>
+	  <techLevel>Medieval</techLevel>
+	  <tab>Cultivation</tab>
+	  <prerequisites>
+        <li>AC_Tilling</li>
+      </prerequisites>
 	</ResearchProjectDef>
 
   <ResearchProjectDef>
@@ -27,6 +29,7 @@
     <description>Allows you to create fertilizer.</description>
     <baseCost>300</baseCost>
     <techLevel>Medieval</techLevel>
+	<tab>Cultivation</tab>
     <prerequisites>
       <li>AC_Composting</li>
     </prerequisites>
@@ -38,6 +41,7 @@
     <description>Allows you to create enriched fertilizer.</description>
     <baseCost>500</baseCost>
     <techLevel>Industrial</techLevel>
+	<tab>Cultivation</tab>
     <prerequisites>
       <li>DrugProduction</li>
       <li>AC_SimpleCultivation</li>
@@ -50,6 +54,7 @@
     <description>Allows you to create miracle fertilizer.</description>
     <baseCost>800</baseCost>
     <techLevel>Spacer</techLevel>
+	<tab>Cultivation</tab>
     <prerequisites>
       <li>AC_AdvancedCultivation</li>
     </prerequisites>
