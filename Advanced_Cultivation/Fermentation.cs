@@ -35,7 +35,6 @@ namespace Advanced_Cultivation
         public float maxFermentTemp;
         public float minFermentTemp;
         public float ruinProgressPerDegreePerTick;
-        public bool fermented = false;
         public float heatPerSecondPerFermenter = 0.5f;
         public float heatPushMinTemperature = -99999f;
         public float heatPushMaxTemperature = 99999f;
@@ -52,6 +51,7 @@ namespace Advanced_Cultivation
     {
         public float fermentProgress;
         public float ruinedPercent;
+        public bool fermented = false;
 
         public CompProperties_AC_Fermenter Props
         {
@@ -172,14 +172,34 @@ namespace Advanced_Cultivation
             {
                 float fermentPerTick = 1f / (this.Props.daysToFerment * 60000f);
                 this.fermentProgress += fermentPerTick * ticks;
-                if (this.fermentProgress >= 1f && !this.Props.fermented)
+                if (this.fermentProgress >= 1f && !this.fermented)
                 {
-                    this.Ferment();
+                    this.fermented = true;
+                }
+                if (this.fermented)
+                {
+                    if (this.parent.GetType() != typeof(Building_AC_CompostBin))
+                    {
+                        Thing thing = ThingMaker.MakeThing(this.Props.fermentedThing, null);
+                        thing.stackCount = this.parent.stackCount;
+                        GenSpawn.Spawn(thing, this.parent.Position, this.parent.Map);
+                        this.parent.Destroy(DestroyMode.Vanish);
+                    }
                 }
             }
             else
             {
-                this.parent.Destroy(DestroyMode.Vanish);
+                if (this.parent.IsInAnyStorage() && this.parent.SpawnedOrAnyParentSpawned)
+                {
+                    Messages.Message("AC.CompostRuined".Translate(new object[]
+                    {
+                        this.parent.Label
+                    }).CapitalizeFirst(), new TargetInfo(this.parent.PositionHeld, this.parent.MapHeld, false), MessageTypeDefOf.NegativeEvent, true);
+                }
+                if (this.parent.GetType() != typeof(Building_AC_CompostBin))
+                {
+                    this.parent.Destroy(DestroyMode.Vanish);
+                }
             }
             this.UpdateRuinedPercent(ticks);
         }
@@ -225,22 +245,6 @@ namespace Advanced_Cultivation
                 {
                     this.Reset();
                 }
-            }
-        }
-
-        public void Ferment() // Create Fermented Compost on tile if this.parent is raw_compost
-        {
-            this.Props.fermented = true;
-            if (this.parent.GetType() == typeof(Building_AC_CompostBin))
-            {
-                return;
-            }
-            else
-            {
-                Thing thing = ThingMaker.MakeThing(this.Props.fermentedThing, null);
-                thing.stackCount = this.parent.stackCount;
-                GenSpawn.Spawn(thing, parent.Position, parent.Map);
-                this.parent.Destroy(DestroyMode.Vanish);
             }
         }
 
@@ -461,6 +465,10 @@ namespace Advanced_Cultivation
         {
             if (signal == "RuinedByTemperature")
             {
+                Messages.Message("AC.CompostRuined".Translate(new object[]
+                {
+                    this.Label
+                }).CapitalizeFirst(), new TargetInfo(this.PositionHeld, this.MapHeld, false), MessageTypeDefOf.NegativeEvent, true);
                 this.Reset();
             }
         }

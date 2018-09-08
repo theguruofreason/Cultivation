@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Vanilla Terrain Patch -->
+<Patch>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/TerrainDef[defName="Soil" or defName="MossyTerrain"]/fertility</xpath>
+    <value>
+      <fertility>0.7</fertility>
+    </value>
+  </Operation>
+
+ <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/TerrainDef[defName="MarshyTerrain"]/fertility</xpath>
+    <value>
+      <fertility>0.5</fertility>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/TerrainDef[defName="SoilRich"]/fertility</xpath>
+    <value>
+      <fertility>1.0</fertility>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/TerrainDef[defName="Gravel"]/fertility</xpath>
+    <value>
+      <fertility>0.45</fertility>
+    </value>
+  </Operation>
+</Patch>

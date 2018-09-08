@@ -19,5 +19,6 @@
   <AC.FermentProgress>Fermentation Progress</AC.FermentProgress>
   <AC.FermentProgressSave>FermentationProgress</AC.FermentProgressSave>
   <AC.Recovering>Recovering from bad temperature</AC.Recovering>
+  <AC.CompostRuined>{0} has been ruined by bad temperature!</AC.CompostRuined>
 
 </LanguageData>

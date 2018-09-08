@@ -1,10 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
     <ModMetaData>
-        <name>Advanced Cultivation [B18]</name>
+        <name>Advanced Cultivation [B19]</name>
         <author>Gasch</author>
         <url></url>
-        <targetVersion>0.18.0</targetVersion>
-        <description>
-		Advanced Cultivation aims to diversify the farming experience in Rimworld.
+        <targetVersion>0.19.2</targetVersion>
+		<description>
+Advanced Cultivation aims to diversify the farming experience in Rimworld. To this aim, soil has been reworked and composting and fertilizer have been introduced!
+
+Overwritten Vanilla Ground:
+
+Soil
+	Fertility: 70%
+	
+Rich Soil
+	Fertility: 100%
+	
+Marshy Soil
+	Fertility: 50%
+	Dries to: Rich Soil
+	
+Gravel
+	Fertility: 45%
+	
+Lichen-Covered Dirt
+	Fertility: 70%
+	
+New Ground Types:
+
+Tilled Soil 
+	Has 90 fertility
+	Requires the "Tilling" research
+	Only takes work to make!
+
+Fertilized Soil 
+	Has 120 fertility
+	Requires no research
+	Costs 1 Fertilizer to construct
+	
+Enriched Soil
+	Has 150 fertility
+	Requires no research
+	Costs 1 Enriched Fertilizer to construct
+	
+Miracle Soil
+	Has 200(!!!) fertility
+	Requires no research
+	Costs 1 Miracle Fertilizer to construct
+
+New Items:
+
+Raw Compost
+	Requires the "Composting" research
+	Costs .25 nutrition (~5 meat) per compost
+	Can be crafted in batches of 5
+	Craft at crafting spot or butcher table
+	
+Fermented Compost
+	Raw Compost naturally ferments over time (10 days by default)
+	Compost Bins allow compost to ferment faster (6 days by default)
+
+Fertilizer
+	Requires the "Simple Cultivation" research
+	Costs 5 fermented compost per fertilizer
+	Craft at a Butcher Table or Drug Lab
+	
+Enriched Fertilizer
+	Requires the "Advanced Cultivation" research
+	Costs 7 fermented compost and 2 psychite tea per fertilizer
+	Craft at a Drug Lab
+	
+Miracle Fertilizer
+	Requires the "Miracle Cultivation" research
+	Costs 10 fermented compost and 3 flake per fertilizer
+	Craft at a Drug Lab
+	
+If you don't like the increased difficulty from the soil changes, feel free to modify the Patches/Vanilla_Overwrites_AC.xml.
 		</description>
 </ModMetaData>
