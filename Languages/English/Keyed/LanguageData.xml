@@ -20,5 +20,10 @@
   <AC.FermentProgressSave>FermentationProgress</AC.FermentProgressSave>
   <AC.Recovering>Recovering from bad temperature</AC.Recovering>
   <AC.CompostRuined>{0} has been ruined by bad temperature!</AC.CompostRuined>
+  
+  <!-- ===== Tilling ===== -->
+
+  <AC.CommandToggleTill>Allow Tilling</AC.CommandToggleTill>
+  <AC.CommandToggleTillDesc>When disabled, colonist will not till the ground before planting.</AC.CommandToggleTillDesc>
 
 </LanguageData>

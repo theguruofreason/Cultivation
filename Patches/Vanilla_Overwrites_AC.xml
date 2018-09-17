@@ -9,10 +9,62 @@
     </value>
   </Operation>
 
- <Operation Class="PatchOperationReplace">
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/TerrainDef[defName="Soil"]</xpath>
+    <value>
+      <modExtensions>
+        <li Class="Advanced_Cultivation.TerrainExtension">
+          <tillable>true</tillable>
+          <tillsTo>AC_SoilTilled</tillsTo>
+        </li>
+      </modExtensions>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/TerrainDef[defName="MossyTerrain"]</xpath>
+    <value>
+      <modExtensions>
+        <li Class="Advanced_Cultivation.TerrainExtension">
+          <tillable>true</tillable>
+          <tillsTo>AC_MossyTerrainTilled</tillsTo>
+          <tillWorkAmount>460</tillWorkAmount>
+        </li>
+      </modExtensions>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
     <xpath>/Defs/TerrainDef[defName="MarshyTerrain"]/fertility</xpath>
     <value>
-      <fertility>0.5</fertility>
+      <fertility>0.7</fertility>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/TerrainDef[defName="MarshyTerrain"]/driesTo</xpath>
+    <value>
+      <driesTo>SoilRich</driesTo>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/TerrainDef[defName="Mud"]/driesTo</xpath>
+    <value>
+      <driesTo>SoilRich</driesTo>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/TerrainDef[defName="MarshyTerrain"]</xpath>
+    <value>
+      <modExtensions>
+        <li Class="Advanced_Cultivation.TerrainExtension">
+          <tillable>true</tillable>
+          <tillsTo>AC_MarshyTerrainTilled</tillsTo>
+          <tillWorkAmount>520</tillWorkAmount>
+        </li>
+      </modExtensions>
     </value>
   </Operation>
 
@@ -20,6 +72,18 @@
     <xpath>/Defs/TerrainDef[defName="SoilRich"]/fertility</xpath>
     <value>
       <fertility>1.0</fertility>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/TerrainDef[defName="SoilRich"]</xpath>
+    <value>
+      <modExtensions>
+        <li Class="Advanced_Cultivation.TerrainExtension">
+          <tillable>true</tillable>
+          <tillsTo>AC_SoilRichTilled</tillsTo>
+        </li>
+      </modExtensions>
     </value>
   </Operation>
 

@@ -22,6 +22,8 @@ namespace Advanced_Cultivation
     {
         public static JobDef AC_EmptyCompostBin;
         public static JobDef AC_FillCompostBin;
+        public static JobDef AC_Till;
+        public static JobDef CutPlant;
     }
 
     // Fermenter CompProperties //
@@ -170,8 +172,11 @@ namespace Advanced_Cultivation
             }
             if (!this.Ruined)
             {
-                float fermentPerTick = 1f / (this.Props.daysToFerment * 60000f);
-                this.fermentProgress += fermentPerTick * ticks;
+                if (this.FermenterCount > 0)
+                {
+                    float fermentPerTick = 1f / (this.Props.daysToFerment * 60000f);
+                    this.fermentProgress += fermentPerTick * ticks;
+                }
                 if (this.fermentProgress >= 1f && !this.fermented)
                 {
                     this.fermented = true;
@@ -304,7 +309,7 @@ namespace Advanced_Cultivation
                         }));
                 }
             }
-            if (!this.Ruined)
+            if (!this.Ruined && this.FermenterCount > 0)
             {
                 stringBuilder.AppendLine(string.Concat(new string[]
                     {
@@ -788,9 +793,9 @@ namespace Advanced_Cultivation
             }
         }
 
-        public override bool TryMakePreToilReservations(bool errorOnFail)
+        public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            return this.pawn.Reserve(this.CompostBin, this.job, 1, -1, null, errorOnFail);
+            return this.pawn.Reserve(this.CompostBin, this.job, 1, -1, null, errorOnFailed);
         }
 
         [DebuggerHidden]
@@ -799,14 +804,14 @@ namespace Advanced_Cultivation
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
             this.FailOnBurningImmobile(TargetIndex.A);
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
-            yield return Toils_General.Wait(200).FailOnDestroyedNullOrForbidden(TargetIndex.A).FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch).FailOn(() => !this.CompostBin.Fermented).WithProgressBarToilDelay(TargetIndex.A, false, -0.5f);
+            yield return Toils_General.Wait(200, TargetIndex.None).FailOnDestroyedNullOrForbidden(TargetIndex.A).FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch).FailOn(() => !this.CompostBin.Fermented).WithProgressBarToilDelay(TargetIndex.A, false, -0.5f);
             yield return new Toil
             {
                 initAction = delegate {
                     Thing thing = this.CompostBin.TakeOutCompost();
-                    GenPlace.TryPlaceThing(thing, this.pawn.Position, this.Map, ThingPlaceMode.Near, null);
-                    StoragePriority currentPriority = StoreUtility.StoragePriorityAtFor(thing.Position, thing);
-                    if (StoreUtility.TryFindBestBetterStoreCellFor(thing, this.pawn, this.Map, currentPriority, this.pawn.Faction, out IntVec3 c, true))
+                    GenPlace.TryPlaceThing(thing, this.pawn.Position, base.Map, ThingPlaceMode.Near, null, null);
+                    StoragePriority currentPriority = StoreUtility.CurrentStoragePriorityOf(thing);
+                    if (StoreUtility.TryFindBestBetterStoreCellFor(thing, this.pawn, base.Map, currentPriority, this.pawn.Faction, out IntVec3 c, true))
                     {
                         this.job.SetTarget(TargetIndex.C, c);
                         this.job.SetTarget(TargetIndex.B, thing);

@@ -12,5 +12,11 @@
     <driverClass>Advanced_Cultivation.JobDriver_EmptyCompostBin</driverClass>
     <reportString>taking fermented compost out of TargetA.</reportString>
   </JobDef>
+
+  <JobDef>
+    <defName>AC_Till</defName>
+    <driverClass>Advanced_Cultivation.JobDriver_TillCell</driverClass>
+    <reportString>tilling TargetA.</reportString>
+  </JobDef>
   
 </Defs>
