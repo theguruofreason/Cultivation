@@ -5,7 +5,7 @@
         <url></url>
         <targetVersion>0.19.2</targetVersion>
 		<description>
-Advanced Cultivation aims to diversify the farming experience in Rimworld. To this aim, soil has been reworked and composting and fertilizer have been introduced!
+Advanced Cultivation aims to diversify the farming experience in Rimworld. To this aim, soil has been reworked and tilling, composting, and fertilizer have been introduced!
 
 Overwritten Vanilla Ground:
 
@@ -16,35 +16,32 @@ Rich Soil
 	Fertility: 100%
 	
 Marshy Soil
-	Fertility: 50%
+	Fertility: 70%
 	Dries to: Rich Soil
 	
 Gravel
-	Fertility: 45%
+	Fertility: 40%
 	
 Lichen-Covered Dirt
 	Fertility: 70%
 	
-New Ground Types:
+Mud
+	Dries to: Rich Soil
 
-Tilled Soil 
-	Has 90% fertility
-	Requires the "Tilling" research
-	Only takes work to make!
+Tilling
+	Tilling soil gives a 30% fertility boost
+	Soil must be re-tilled after each harvest
 
 Fertilized Soil 
-	Has 125% fertility
-	Requires no research
+	Has 100% fertility
 	Costs 1 Fertilizer to construct
 	
 Enriched Soil
-	Has 150% fertility
-	Requires no research
+	Has 130% fertility
 	Costs 1 Enriched Fertilizer to construct
 	
 Miracle Soil
-	Has 200%(!!!) fertility
-	Requires no research
+	Has 170% fertility
 	Costs 1 Miracle Fertilizer to construct
 
 New Items:

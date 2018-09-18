@@ -90,7 +90,29 @@
   <Operation Class="PatchOperationReplace">
     <xpath>/Defs/TerrainDef[defName="Gravel"]/fertility</xpath>
     <value>
-      <fertility>0.45</fertility>
+      <fertility>0.4</fertility>
     </value>
   </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/TerrainDef[defName="Gravel"]</xpath>
+    <value>
+      <modExtensions>
+        <li Class="Advanced_Cultivation.TerrainExtension">
+          <tillable>true</tillable>
+          <tillsTo>AC_GravelTilled</tillsTo>
+        </li>
+      </modExtensions>
+    </value>
+  </Operation>
+  
+  <!-- alter vanilla fertility min -->
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="Plant_Potato"]/plant</xpath>
+    <value>
+      <fertilityMin>0.4</fertilityMin>
+    </value>
+  </Operation>
+  
 </Patch>

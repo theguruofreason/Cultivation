@@ -3,4 +3,8 @@ Textures/Orig
 *.pbd
 *.cache
 *.orig
+*.xcf
+*.pdb
+*.html
+Assemblies/Advanced_Cultivation.pdb
 !Assemblies/Advanced_Cultivation.dll

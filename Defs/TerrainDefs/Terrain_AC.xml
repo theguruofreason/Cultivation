@@ -5,7 +5,7 @@
 	<TerrainDef Name="AC_TerrainBase" Abstract="True">
 		<renderPrecedence>340</renderPrecedence>
     <edgeType>FadeRough</edgeType>
-		<pathCost>5</pathCost>
+		<pathCost>2</pathCost>
 		<affordances>
 			<li>Light</li>
       <li>Medium</li>
@@ -13,7 +13,6 @@
 			<li>GrowSoil</li>
 			<li>Diggable</li>
 		</affordances>
-		<avoidWander>true</avoidWander>
     <generatedFilth>Filth_Dirt</generatedFilth>
 		<takeFootprints>True</takeFootprints>
     <tools>
@@ -29,6 +28,8 @@
 	</TerrainDef>
 
   <TerrainDef Name="AC_DesignatableTerrainBase" parentName="AC_TerrainBase" Abstract="True">
+    <renderPrecedence>340</renderPrecedence>
+    <edgeType>FadeRough</edgeType>
     <designationCategory>Floors</designationCategory>
     <constructEffect>ConstructDirt</constructEffect>
     <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
@@ -49,6 +50,22 @@
       <Beauty>0.5</Beauty>
     </statBases>
     <fertility>1</fertility>
+  </TerrainDef>
+
+  <TerrainDef ParentName="AC_TerrainBase">
+    <defName>AC_GravelTilled</defName>
+    <label>tilled stony soil</label>
+    <texturePath>Terrain/GravelTilled</texturePath>
+    <layerable>true</layerable>
+    <modExtensions>
+      <li Class="Advanced_Cultivation.TerrainExtension">
+        <tilledFrom>Gravel</tilledFrom>
+      </li>
+    </modExtensions>
+    <statBases>
+      <Beauty>0</Beauty>
+    </statBases>
+    <fertility>0.7</fertility>
   </TerrainDef>
 
   <TerrainDef ParentName="AC_TerrainBase">
@@ -96,7 +113,7 @@
     <statBases>
       <Beauty>0.5</Beauty>
     </statBases>
-    <fertility>1.25</fertility>
+    <fertility>1.3</fertility>
   </TerrainDef>
 
   <TerrainDef ParentName="AC_DesignatableTerrainBase">
@@ -134,7 +151,7 @@
     <statBases>
       <Beauty>1</Beauty>
     </statBases>
-    <fertility>1.25</fertility>
+    <fertility>1.3</fertility>
   </TerrainDef>
 
   <TerrainDef ParentName="AC_DesignatableTerrainBase">
@@ -156,7 +173,7 @@
       <Beauty>1</Beauty>
       <WorkToBuild>500</WorkToBuild>
     </statBases>
-    <fertility>1.25</fertility>
+    <fertility>1.3</fertility>
   </TerrainDef>
 
   <TerrainDef ParentName="AC_TerrainBase">
@@ -172,7 +189,7 @@
     <statBases>
       <Beauty>1</Beauty>
     </statBases>
-    <fertility>1.5</fertility>
+    <fertility>1.6</fertility>
   </TerrainDef>
 
   <TerrainDef ParentName="AC_DesignatableTerrainBase">
@@ -194,7 +211,7 @@
       <Beauty>1</Beauty>
       <WorkToBuild>500</WorkToBuild>
     </statBases>
-    <fertility>1.75</fertility>
+    <fertility>1.7</fertility>
   </TerrainDef>
 
   <TerrainDef ParentName="AC_TerrainBase">

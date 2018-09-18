@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Verse;
-using System.Linq;
 using Verse.AI;
 using RimWorld;
 using Harmony;
@@ -138,7 +134,7 @@ namespace Advanced_Cultivation
             }
         }
 
-        private float workleft = -1000f;
+        private float workdone = 0f;
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
@@ -152,38 +148,31 @@ namespace Advanced_Cultivation
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            IntVec3 c = this.TargetLocA;
-            TerrainDef curTerrain = this.Map.terrainGrid.TerrainAt(c);
-            bool tillAllowed = TillToggle.IsAllowed((Zone_Growing)this.Map.zoneManager.ZoneAt(c));
-            bool terrainTillable = curTerrain.GetModExtension<TerrainExtension>().tillable;
-            this.FailOn(() => !tillAllowed && !terrainTillable);
-            TerrainDef tillTerrain = curTerrain.GetModExtension<TerrainExtension>().tillsTo;
-            float tillworkAmount = curTerrain.GetModExtension<TerrainExtension>().tillWorkAmount;
             yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.Touch);
             Toil tillCell = new Toil();
             tillCell.initAction = delegate ()
             {
-                this.workleft = tillworkAmount;
+                this.workdone = 0f;
             };
             tillCell.tickAction = delegate ()
             {
                 Pawn actor = tillCell.actor;
                 float statValue = actor.GetStatValue(StatDefOf.PlantWorkSpeed, true);
                 float num = statValue;
-                this.workleft -= num;
+                this.workdone += num;
                 if (actor.skills != null)
                 {
                     actor.skills.Learn(SkillDefOf.Plants, 0.05f, false);
                 }
-                if (this.workleft <= 0f)
+                if (this.workdone >= this.Map.terrainGrid.TerrainAt(this.TargetA.Cell).GetModExtension<TerrainExtension>().tillWorkAmount)
                 {
-                    this.Map.terrainGrid.SetTerrain(c, tillTerrain);
+                    this.Map.terrainGrid.SetTerrain(TargetLocA, this.Map.terrainGrid.TerrainAt(this.TargetA.Cell).GetModExtension<TerrainExtension>().tillsTo);
                     this.ReadyForNextToil();
                     return;
                 }
             };
             tillCell.FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
-            tillCell.WithProgressBar(TargetIndex.A, () => 1f - this.workleft / tillworkAmount, false, -0.5f);
+            tillCell.WithProgressBar(TargetIndex.A, () => this.workdone / this.Map.terrainGrid.TerrainAt(this.TargetA.Cell).GetModExtension<TerrainExtension>().tillWorkAmount, false, -0.5f);
             tillCell.defaultCompleteMode = ToilCompleteMode.Never;
             tillCell.activeSkill = (() => SkillDefOf.Plants);
             yield return tillCell;
@@ -193,7 +182,7 @@ namespace Advanced_Cultivation
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look<float>(ref this.workleft, "workLeft", 0f, false);
+            Scribe_Values.Look<float>(ref this.workdone, "workDone", 0f, false);
         }
     }
 
