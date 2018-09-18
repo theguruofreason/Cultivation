@@ -107,8 +107,12 @@ namespace Advanced_Cultivation
             toil.initAction += () =>
             {
                 IntVec3 c = toil.actor.jobs.curJob.GetTarget(TargetIndex.A).Cell;
-                TerrainDef terrainTo = toil.actor.Map.terrainGrid.TerrainAt(c).GetModExtension<TerrainExtension>().tilledFrom;
-                toil.actor.Map.terrainGrid.SetTerrain(c, terrainTo);
+                if (toil.actor.Map.terrainGrid.TerrainAt(c).GetModExtension<TerrainExtension>() != null
+                && toil.actor.Map.terrainGrid.TerrainAt(c).GetModExtension<TerrainExtension>().tilledFrom != null)
+                {
+                    TerrainDef terrainTo = toil.actor.Map.terrainGrid.TerrainAt(c).GetModExtension<TerrainExtension>().tilledFrom;
+                    toil.actor.Map.terrainGrid.SetTerrain(c, terrainTo);
+                }
             };
         }
     }
@@ -206,6 +210,10 @@ namespace Advanced_Cultivation
 
         public override IEnumerable<IntVec3> PotentialWorkCellsGlobal(Pawn pawn)
         {
+            if (!ResearchProjectDefOf.AC_Tilling.IsFinished)
+            {
+                yield break;
+            }
             Danger maxDanger = pawn.NormalMaxDanger();
             List<Zone> zonesList = pawn.Map.zoneManager.AllZones;
             ReservationLayerDef layer = ReservationLayerDefOf.Floor;
@@ -222,7 +230,8 @@ namespace Advanced_Cultivation
                         for (int k = 0; k < growZone.cells.Count; k++)
                         {
                             IntVec3 c = growZone.cells[k];
-                            if (pawn.Map.terrainGrid.TerrainAt(c).GetModExtension<TerrainExtension>().tillable
+                            if (pawn.Map.terrainGrid.TerrainAt(c).GetModExtension<TerrainExtension>() != null
+                                && pawn.Map.terrainGrid.TerrainAt(c).GetModExtension<TerrainExtension>().tillable
                                 && pawn.CanReach(growZone.Cells[0], PathEndMode.OnCell, maxDanger, false, TraverseMode.ByPawn)
                                 && pawn.CanReserve(c, 1, -1, layer, false))
                             {
@@ -237,6 +246,10 @@ namespace Advanced_Cultivation
 
         public override Job JobOnCell(Pawn pawn, IntVec3 c, bool forced = false)
         {
+            if (!ResearchProjectDefOf.AC_Tilling.IsFinished)
+            {
+                return null;
+            }
             Map map = pawn.Map;
             bool flag = false;
             if (c.IsForbidden(pawn))
