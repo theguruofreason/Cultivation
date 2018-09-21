@@ -30,7 +30,7 @@
         </products>
 		<researchPrerequisite>AC_Composting</researchPrerequisite>
         <workSpeedStat>CookSpeed</workSpeedStat>
-		<workAmount>250</workAmount>
+		<workAmount>100</workAmount>
         <effectWorking>Cook</effectWorking>
         <soundWorking>Recipe_CookMeal</soundWorking>
 		<workSkill>Cooking</workSkill>
@@ -69,7 +69,7 @@
         </products>
 		<researchPrerequisite>AC_Composting</researchPrerequisite>
         <workSpeedStat>CookSpeed</workSpeedStat>
-		<workAmount>1250</workAmount>
+		<workAmount>500</workAmount>
         <effectWorking>Cook</effectWorking>
         <soundWorking>Recipe_CookMeal</soundWorking>
 		<workSkill>Cooking</workSkill>

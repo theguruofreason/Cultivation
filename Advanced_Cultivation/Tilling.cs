@@ -29,17 +29,17 @@ namespace Advanced_Cultivation
     [StaticConstructorOnStartup]
     internal static class TillToggle
     {
-        private static readonly HashSet<Zone_Growing> DisallowedZones = new HashSet<Zone_Growing>();
+        private static readonly HashSet<Zone_Growing> AllowedZones = new HashSet<Zone_Growing>();
 
         static TillToggle() => HarmonyInstance.Create("ToggleTilling").PatchAll();
 
-        public static void Reset() => DisallowedZones.Clear();
-        public static bool IsAllowed(Zone_Growing zone) => !DisallowedZones.Contains(zone);
+        public static void Reset() => AllowedZones.Clear();
+        public static bool IsAllowed(Zone_Growing zone) => AllowedZones.Contains(zone);
         public static void SetAllowed(Zone_Growing zone, bool allowed)
         {
-            var isDisallowed = DisallowedZones.Contains(zone);
-            if (allowed && isDisallowed) { DisallowedZones.Remove(zone); }
-            else if (!allowed && !isDisallowed) { DisallowedZones.Add(zone); }
+            var isAllowed = AllowedZones.Contains(zone);
+            if (!allowed && isAllowed) { AllowedZones.Remove(zone); }
+            else if (allowed && !isAllowed) { AllowedZones.Add(zone); }
         }
     }
 

@@ -17,6 +17,7 @@
   <AC.BadTemp>Bad temperature</AC.BadTemp>
   <AC.NoRawCompost>Contains no raw compost</AC.NoRawCompost>
   <AC.FermentProgress>Fermentation Progress</AC.FermentProgress>
+  <AC.FermentationComplete>Fermentation Complete!</AC.FermentationComplete>
   <AC.FermentProgressSave>FermentationProgress</AC.FermentProgressSave>
   <AC.Recovering>Recovering from bad temperature</AC.Recovering>
   <AC.CompostRuined>{0} has been ruined by bad temperature!</AC.CompostRuined>

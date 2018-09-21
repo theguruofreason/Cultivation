@@ -311,12 +311,22 @@ namespace Advanced_Cultivation
             }
             if (!this.Ruined && this.FermenterCount > 0)
             {
-                stringBuilder.AppendLine(string.Concat(new string[]
-                    {
+                if (!this.fermented)
+                {
+                    stringBuilder.AppendLine(string.Concat(new string[]
+                        {
                 "AC.FermentProgress".Translate() + ": " + this.fermentProgress.ToStringPercent(),
                        "AC.CompletesIn".Translate(),
                         this.EstimatedTicksLeft.ToStringTicksToPeriod()
-                    }));
+                        }));
+                }
+                else
+                {
+                    stringBuilder.AppendLine(string.Concat(new string[]
+                        {
+                "AC.FermentationComplete".Translate()
+                        }));
+                }
             }
             return stringBuilder.ToString().TrimEndNewlines();
         }
