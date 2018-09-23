@@ -235,7 +235,17 @@ namespace Advanced_Cultivation
                                 && pawn.CanReach(growZone.Cells[0], PathEndMode.OnCell, maxDanger, false, TraverseMode.ByPawn)
                                 && pawn.CanReserve(c, 1, -1, layer, false))
                             {
-                                yield return growZone.cells[k];
+                                if (c.GetPlant(pawn.Map) != null)
+                                {
+                                    if (!c.GetPlant(pawn.Map).sown)
+                                    {
+                                        yield return growZone.cells[k];
+                                    }
+                                }
+                                else
+                                {
+                                    yield return growZone.cells[k];
+                                }
                             }
                         }
                     }

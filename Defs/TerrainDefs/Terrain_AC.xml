@@ -32,6 +32,7 @@
     <edgeType>FadeRough</edgeType>
     <designationCategory>Floors</designationCategory>
     <constructEffect>ConstructDirt</constructEffect>
+    <designatorDropdown>Fertilized_Soil</designatorDropdown>
     <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
     <terrainAffordanceNeeded>GrowSoil</terrainAffordanceNeeded>
   </TerrainDef>
