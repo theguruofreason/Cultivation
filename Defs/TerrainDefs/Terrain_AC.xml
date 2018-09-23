@@ -27,21 +27,40 @@
     </tools>
 	</TerrainDef>
 
-  <TerrainDef Name="AC_DesignatableTerrainBase" parentName="AC_TerrainBase" Abstract="True">
-    <renderPrecedence>340</renderPrecedence>
+  <TerrainDef Name="AC_DesignatableTerrainBase" Abstract="True">
+		<renderPrecedence>340</renderPrecedence>
     <edgeType>FadeRough</edgeType>
+		<pathCost>2</pathCost>
+		<affordances>
+			<li>Light</li>
+      <li>Medium</li>
+			<li>Heavy</li>
+			<li>GrowSoil</li>
+			<li>Diggable</li>
+		</affordances>
     <designationCategory>Floors</designationCategory>
     <constructEffect>ConstructDirt</constructEffect>
     <designatorDropdown>Fertilized_Soil</designatorDropdown>
     <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
     <terrainAffordanceNeeded>GrowSoil</terrainAffordanceNeeded>
+    <generatedFilth>Filth_Dirt</generatedFilth>
+		<takeFootprints>True</takeFootprints>
+    <tools>
+      <li>
+        <label>dirt</label>
+        <capacities>
+          <li>KickMaterialInEyes</li>
+        </capacities>
+        <hediff>DirtInEyes</hediff>
+        <cooldownTime>1.5</cooldownTime>
+      </li>
+    </tools>
   </TerrainDef>
 
   <TerrainDef ParentName="AC_TerrainBase">
     <defName>AC_SoilTilled</defName>
     <label>tilled soil</label>
     <texturePath>Terrain/SoilTilled</texturePath>
-    <layerable>true</layerable>
     <modExtensions>
       <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>Soil</tilledFrom>
@@ -57,7 +76,6 @@
     <defName>AC_GravelTilled</defName>
     <label>tilled stony soil</label>
     <texturePath>Terrain/GravelTilled</texturePath>
-    <layerable>true</layerable>
     <modExtensions>
       <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>Gravel</tilledFrom>
@@ -73,7 +91,6 @@
     <defName>AC_MossyTerrainTilled</defName>
     <label>tilled lichen-covered soil</label>
     <texturePath>Terrain/MossyTerrainTilled</texturePath>
-    <layerable>true</layerable>
     <modExtensions>
       <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>MossyTerrain</tilledFrom>
@@ -89,7 +106,6 @@
     <defName>AC_MarshyTerrainTilled</defName>
     <label>tilled marshy soil</label>
     <texturePath>Terrain/MarshyTerrainTilled</texturePath>
-    <layerable>true</layerable>
     <modExtensions>
       <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>MarshyTerrain</tilledFrom>
@@ -105,7 +121,6 @@
     <defName>AC_SoilRichTilled</defName>
     <label>tilled rich soil</label>
     <texturePath>Terrain/SoilRichTilled</texturePath>
-    <layerable>true</layerable>
     <modExtensions>
       <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>SoilRich</tilledFrom>
@@ -124,14 +139,12 @@
     <texturePath>Terrain/SoilFertilized</texturePath>
     <modExtensions>
       <li Class="Advanced_Cultivation.TerrainExtension">
-        <tillable>true</tillable>
         <tillsTo>AC_SoilFertilizedTilled</tillsTo>
       </li>
     </modExtensions>
     <costList>
       <AC_Fertilizer>1</AC_Fertilizer>
     </costList>
-    <layerable>true</layerable>
     <statBases>
       <Beauty>0.5</Beauty>
       <WorkToBuild>500</WorkToBuild>
@@ -143,7 +156,6 @@
     <defName>AC_SoilFertilizedTilled</defName>
     <label>tilled fertilized soil</label>
     <texturePath>Terrain/SoilFertilizedTilled</texturePath>
-    <layerable>true</layerable>
     <modExtensions>
       <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>AC_SoilFertilized</tilledFrom>
@@ -162,14 +174,12 @@
     <texturePath>Terrain/SoilEnriched</texturePath>
     <modExtensions>
       <li Class="Advanced_Cultivation.TerrainExtension">
-        <tillable>true</tillable>
         <tillsTo>AC_SoilEnrichedTilled</tillsTo>
       </li>
     </modExtensions>
     <costList>
       <AC_EnrichedFertilizer>1</AC_EnrichedFertilizer>
     </costList>
-    <layerable>true</layerable>
     <statBases>
       <Beauty>1</Beauty>
       <WorkToBuild>500</WorkToBuild>
@@ -181,7 +191,6 @@
     <defName>AC_SoilEnrichedTilled</defName>
     <label>tilled enriched soil</label>
     <texturePath>Terrain/SoilEnrichedTilled</texturePath>
-    <layerable>true</layerable>
     <modExtensions>
       <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>AC_SoilEnriched</tilledFrom>
@@ -200,14 +209,12 @@
     <texturePath>Terrain/SoilMiracle</texturePath>
     <modExtensions>
       <li Class="Advanced_Cultivation.TerrainExtension">
-        <tillable>true</tillable>
         <tillsTo>AC_SoilMiracleTilled</tillsTo>
       </li>
     </modExtensions>
     <costList>
       <AC_MiracleFertilizer>1</AC_MiracleFertilizer>
     </costList>
-    <layerable>true</layerable>
     <statBases>
       <Beauty>1</Beauty>
       <WorkToBuild>500</WorkToBuild>
@@ -219,7 +226,6 @@
     <defName>AC_SoilMiracleTilled</defName>
     <label>tilled miracle soil</label>
     <texturePath>Terrain/SoilMiracleTilled</texturePath>
-    <layerable>true</layerable>
     <modExtensions>
       <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>AC_SoilMiracle</tilledFrom>

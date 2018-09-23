@@ -122,7 +122,6 @@ namespace Advanced_Cultivation
     public class TerrainExtension : DefModExtension
     {
         public static readonly TerrainExtension defaultValues = new TerrainExtension();
-        public bool tillable = false;
         public TerrainDef tillsTo = TerrainDefOf.AC_SoilTilled;
         public TerrainDef tilledFrom = TerrainDefOf.Soil;
         public float tillWorkAmount = 400;
@@ -231,7 +230,7 @@ namespace Advanced_Cultivation
                         {
                             IntVec3 c = growZone.cells[k];
                             if (pawn.Map.terrainGrid.TerrainAt(c).GetModExtension<TerrainExtension>() != null
-                                && pawn.Map.terrainGrid.TerrainAt(c).GetModExtension<TerrainExtension>().tillable
+                                && pawn.Map.terrainGrid.TerrainAt(c).GetModExtension<TerrainExtension>().tillsTo != null
                                 && pawn.CanReach(growZone.Cells[0], PathEndMode.OnCell, maxDanger, false, TraverseMode.ByPawn)
                                 && pawn.CanReserve(c, 1, -1, layer, false))
                             {

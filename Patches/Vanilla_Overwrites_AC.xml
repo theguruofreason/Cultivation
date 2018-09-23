@@ -14,7 +14,6 @@
     <value>
       <modExtensions>
         <li Class="Advanced_Cultivation.TerrainExtension">
-          <tillable>true</tillable>
           <tillsTo>AC_SoilTilled</tillsTo>
         </li>
       </modExtensions>
@@ -26,7 +25,6 @@
     <value>
       <modExtensions>
         <li Class="Advanced_Cultivation.TerrainExtension">
-          <tillable>true</tillable>
           <tillsTo>AC_MossyTerrainTilled</tillsTo>
           <tillWorkAmount>460</tillWorkAmount>
         </li>
@@ -60,7 +58,6 @@
     <value>
       <modExtensions>
         <li Class="Advanced_Cultivation.TerrainExtension">
-          <tillable>true</tillable>
           <tillsTo>AC_MarshyTerrainTilled</tillsTo>
           <tillWorkAmount>520</tillWorkAmount>
         </li>
@@ -80,7 +77,6 @@
     <value>
       <modExtensions>
         <li Class="Advanced_Cultivation.TerrainExtension">
-          <tillable>true</tillable>
           <tillsTo>AC_SoilRichTilled</tillsTo>
         </li>
       </modExtensions>
@@ -99,7 +95,6 @@
     <value>
       <modExtensions>
         <li Class="Advanced_Cultivation.TerrainExtension">
-          <tillable>true</tillable>
           <tillsTo>AC_GravelTilled</tillsTo>
         </li>
       </modExtensions>

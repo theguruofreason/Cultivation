@@ -51,9 +51,8 @@ namespace Advanced_Cultivation
     
     public class AC_CompFermenter : ThingComp
     {
-        public float fermentProgress;
+        public float fermentProgress = 0f;
         public float ruinedPercent;
-        public bool fermented = false;
 
         public CompProperties_AC_Fermenter Props
         {
@@ -174,14 +173,13 @@ namespace Advanced_Cultivation
             {
                 if (this.FermenterCount > 0)
                 {
-                    float fermentPerTick = 1f / (this.Props.daysToFerment * 60000f);
-                    this.fermentProgress += fermentPerTick * ticks;
+                    if (this.fermentProgress < 1f)
+                    {
+                        float fermentPerTick = 1f / (this.Props.daysToFerment * 60000f);
+                        this.fermentProgress += fermentPerTick * ticks;
+                    }
                 }
-                if (this.fermentProgress >= 1f && !this.fermented)
-                {
-                    this.fermented = true;
-                }
-                if (this.fermented)
+                if (this.fermentProgress >= 1f)
                 {
                     if (this.parent.GetType() != typeof(Building_AC_CompostBin))
                     {
@@ -221,6 +219,7 @@ namespace Advanced_Cultivation
         public void Reset()
         {
             this.ruinedPercent = 0f;
+            this.fermentProgress = 0f;
         }
         
         private void UpdateRuinedPercent(int ticks)
@@ -248,7 +247,7 @@ namespace Advanced_Cultivation
                 }
                 else if (this.ruinedPercent < 0f)
                 {
-                    this.Reset();
+                    this.ruinedPercent = 0f;
                 }
             }
         }
@@ -311,20 +310,20 @@ namespace Advanced_Cultivation
             }
             if (!this.Ruined && this.FermenterCount > 0)
             {
-                if (!this.fermented)
+                if (this.fermentProgress < 1f)
                 {
                     stringBuilder.AppendLine(string.Concat(new string[]
                         {
-                "AC.FermentProgress".Translate() + ": " + this.fermentProgress.ToStringPercent(),
-                       "AC.CompletesIn".Translate(),
-                        this.EstimatedTicksLeft.ToStringTicksToPeriod()
+                            "AC.FermentProgress".Translate() + ": " + this.fermentProgress.ToStringPercent(),
+                            "AC.CompletesIn".Translate(),
+                            this.EstimatedTicksLeft.ToStringTicksToPeriod()
                         }));
                 }
                 else
                 {
                     stringBuilder.AppendLine(string.Concat(new string[]
                         {
-                "AC.FermentationComplete".Translate()
+                            "AC.FermentationComplete".Translate()
                         }));
                 }
             }
@@ -349,7 +348,7 @@ namespace Advanced_Cultivation
         private Material barFilledCachedMat;
         private const int BaseFermentationDuration = 360000;
         private bool fermentFlag = false;
-        public const int Capacity = 25;
+        public int Capacity = 25;
         private static readonly Vector2 BarSize = new Vector2(0.55f, 0.1f);
         private static readonly Color BarZeroProgressColor = new Color(0.4f, 0.27f, 0.22f);
         private static readonly Color BarFermentedColor = new Color(1.0f, 0.8f, 0.3f);
@@ -360,12 +359,12 @@ namespace Advanced_Cultivation
         {
             get
             {
-                AC_CompFermenter comp = base.GetComp<AC_CompFermenter>();
+                AC_CompFermenter comp = this.GetComp<AC_CompFermenter>();
                 return comp.fermentProgress;
             }
             set
             {
-                AC_CompFermenter comp = base.GetComp<AC_CompFermenter>();
+                AC_CompFermenter comp = this.GetComp<AC_CompFermenter>();
                 if (value == this.Progress)
                 {
                     return;
@@ -397,7 +396,7 @@ namespace Advanced_Cultivation
                 {
                     return 0;
                 }
-                return Building_AC_CompostBin.Capacity - this.compostCount;
+                return this.Capacity - this.compostCount;
             }
         }
 
@@ -458,7 +457,6 @@ namespace Advanced_Cultivation
 
         public void AddCompost(int count, Thing addedCompost)
         {
-            base.GetComp<AC_CompFermenter>().Reset();
             if (this.Fermented)
             {
                 Log.Warning("Tried to add compost to a bin with fermented compost in it. " +
@@ -492,8 +490,8 @@ namespace Advanced_Cultivation
         {
             Log.Message($"{ThingID} reset.");
             this.compostCount = 0;
-            this.Progress = 0f;
             fermentFlag = false;
+            this.GetComp<AC_CompFermenter>().Reset();
             base.Map.mapDrawer.MapMeshDirty(base.Position, MapMeshFlag.Things);
         }
 
@@ -528,7 +526,7 @@ namespace Advanced_Cultivation
                         ": ",
                         this.compostCount.ToString(),
                         " / ",
-                        Building_AC_CompostBin.Capacity.ToString()
+                        this.Capacity.ToString()
                         }));
                 }
                 else
@@ -539,7 +537,7 @@ namespace Advanced_Cultivation
                         ": ",
                         this.compostCount.ToString(),
                         " / ",
-                        Building_AC_CompostBin.Capacity.ToString()
+                        this.Capacity.ToString()
                         }));
                 }
             }
@@ -607,7 +605,7 @@ namespace Advanced_Cultivation
                 {
                     center = drawPos,
                     size = Building_AC_CompostBin.BarSize,
-                    fillPercent = (float)this.compostCount / 25f,
+                    fillPercent = (float)this.compostCount / this.Capacity,
                     filledMat = this.BarFilledMat,
                     unfilledMat = Building_AC_CompostBin.BarUnfilledMat,
                     margin = 0.1f,
