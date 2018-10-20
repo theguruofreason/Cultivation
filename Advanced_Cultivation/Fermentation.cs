@@ -175,7 +175,7 @@ namespace Advanced_Cultivation
                 {
                     if (this.fermentProgress < 1f)
                     {
-                        float fermentPerTick = 1f / (this.Props.daysToFerment * 60000f);
+                        float fermentPerTick = (1f / (this.Props.daysToFerment * 60000f)) * this.CurrentTempProgressSpeedFactor;
                         this.fermentProgress += fermentPerTick * ticks;
                     }
                 }
@@ -224,7 +224,7 @@ namespace Advanced_Cultivation
         
         private void UpdateRuinedPercent(int ticks)
         {
-            if (!this.Ruined)
+            if (!this.Ruined && this.FermenterCount > 0)
             {
                 float ambientTemperature = this.parent.AmbientTemperature;
                 if (ambientTemperature > this.Props.maxSafeTemp)
@@ -312,11 +312,19 @@ namespace Advanced_Cultivation
             {
                 if (this.fermentProgress < 1f)
                 {
+                    string completes_in;
+                    if (this.CurrentTempProgressSpeedFactor > 0)
+                    {
+                        completes_in = "AC.CompletesIn".Translate() + this.EstimatedTicksLeft.ToStringTicksToPeriod();
+                    }
+                    else
+                    {
+                        completes_in = "";
+                    }
                     stringBuilder.AppendLine(string.Concat(new string[]
                         {
                             "AC.FermentProgress".Translate() + ": " + this.fermentProgress.ToStringPercent(),
-                            "AC.CompletesIn".Translate(),
-                            this.EstimatedTicksLeft.ToStringTicksToPeriod()
+                            completes_in
                         }));
                 }
                 else

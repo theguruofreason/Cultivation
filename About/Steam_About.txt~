@@ -1,0 +1,78 @@
+  [h1]Advanced Cultivation[/h1]
+  Author: Gasch
+  Target Version: 0.19.2
+
+  The aim of Advanced Cultivation is to diversify the farming experience in Rimworld. To this aim, soil has been reworked and tilling, composting, and fertilizer have been introduced!
+
+[h1]Overwritten Vanilla Ground[/h1]
+[list]
+  [*]Soil
+  [list]
+    [*]Fertility: 70%
+  [/list]
+  [*]Rich Soil
+  [list]
+    [*]Fertility: 100%
+  [/list]
+  [*]Marshy Soil
+  [list]
+Fertility: 70%
+Dries to: Rich Soil
+
+Gravel
+Fertility: 40%
+
+Lichen-Covered Dirt
+Fertility: 70%
+
+Mud
+Dries to: Rich Soil
+
+Tilling
+Tilling soil gives a 30% fertility boost
+Soil must be re-tilled after each harvest
+
+Fertilized Soil 
+Has 100% fertility
+Costs 1 Fertilizer to construct
+
+Enriched Soil
+Has 130% fertility
+Costs 1 Enriched Fertilizer to construct
+
+Miracle Soil
+Has 170% fertility
+Costs 1 Miracle Fertilizer to construct
+
+New Items:
+
+Raw Compost
+Requires the "Composting" research
+Costs .25 nutrition (~5 meat) per compost
+Can be crafted in batches of 5
+Craft at crafting spot or butcher table
+
+Fermented Compost
+Raw Compost naturally ferments over time (10 days by default)
+Compost Bins allow compost to ferment faster (6 days by default)
+
+Fertilizer
+Requires the "Simple Cultivation" research
+Costs 5 fermented compost per fertilizer
+Craft at a Butcher Table or Drug Lab
+
+Enriched Fertilizer
+Requires the "Advanced Cultivation" research
+Costs 7 fermented compost and 2 psychite tea per fertilizer
+Craft at a Drug Lab
+
+Miracle Fertilizer
+Requires the "Miracle Cultivation" research
+Costs 10 fermented compost and 3 flake per fertilizer
+Craft at a Drug Lab
+
+[h1]Compatibility[/h1]
+Mods which add soil for growing will not have tilled versions of that soil, and so it cannot be tilled. Other than that, there are no known compatibility issues.
+
+[h1]Fertility Note[/h1]
+If you don't like the increased difficulty from the soil changes, feel free to modify the Patches/Vanilla_Overwrites_AC.xml.
