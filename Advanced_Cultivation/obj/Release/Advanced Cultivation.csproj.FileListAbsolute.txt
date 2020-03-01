@@ -1,7 +1,7 @@
 C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Advanced_Cultivation\bin\Release\Simple_Cultivation.dll
 C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Advanced_Cultivation\bin\Release\Simple_Cultivation.pdb
-C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Assemblies\Advanced_Cultivation.dll
-C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Assemblies\Advanced_Cultivation.pdb
 C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Advanced_Cultivation\obj\Release\Advanced Cultivation.csprojResolveAssemblyReference.cache
-C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Advanced_Cultivation\obj\Release\Advanced_Cultivation.dll
-C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Advanced_Cultivation\obj\Release\Advanced_Cultivation.pdb
+C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Assemblies\AdvancedCultivation.dll
+C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Assemblies\AdvancedCultivation.pdb
+C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Advanced_Cultivation\obj\Release\AdvancedCultivation.dll
+C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Advanced_Cultivation\obj\Release\AdvancedCultivation.pdb

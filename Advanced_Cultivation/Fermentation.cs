@@ -7,7 +7,7 @@ using Verse;
 using Verse.AI;
 using RimWorld;
 
-namespace Advanced_Cultivation
+namespace AdvancedCultivation
 {
     [DefOf]
     public static class ThingDefOf
@@ -194,10 +194,8 @@ namespace Advanced_Cultivation
             {
                 if (this.parent.IsInAnyStorage() && this.parent.SpawnedOrAnyParentSpawned)
                 {
-                    Messages.Message("AC.CompostRuined".Translate(new object[]
-                    {
-                        this.parent.Label
-                    }).CapitalizeFirst(), new TargetInfo(this.parent.PositionHeld, this.parent.MapHeld, false), MessageTypeDefOf.NegativeEvent, true);
+                    Messages.Message(TranslatorFormattedStringExtensions.Translate("AC.CompostRuined", parent.Label)
+                        .CapitalizeFirst(), new TargetInfo(this.parent.PositionHeld, this.parent.MapHeld, false), MessageTypeDefOf.NegativeEvent, true);
                 }
                 if (this.parent.GetType() != typeof(Building_AC_CompostBin))
                 {
@@ -486,10 +484,8 @@ namespace Advanced_Cultivation
         {
             if (signal == "RuinedByTemperature")
             {
-                Messages.Message("AC.CompostRuined".Translate(new object[]
-                {
-                    this.Label
-                }).CapitalizeFirst(), new TargetInfo(this.PositionHeld, this.MapHeld, false), MessageTypeDefOf.NegativeEvent, true);
+                Messages.Message(TranslatorFormattedStringExtensions.Translate("AC.CompostRuined", this.Label)
+                    .CapitalizeFirst(), new TargetInfo(this.PositionHeld, this.MapHeld, false), MessageTypeDefOf.NegativeEvent, true);
                 this.Reset();
             }
         }

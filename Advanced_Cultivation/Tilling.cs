@@ -3,9 +3,9 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 using RimWorld;
-using Harmony;
+using HarmonyLib;
 
-namespace Advanced_Cultivation
+namespace AdvancedCultivation
 {
     [DefOf]
     public static class TerrainDefOf
@@ -30,8 +30,6 @@ namespace Advanced_Cultivation
     internal static class TillToggle
     {
         private static readonly HashSet<Zone_Growing> AllowedZones = new HashSet<Zone_Growing>();
-
-        static TillToggle() => HarmonyInstance.Create("ToggleTilling").PatchAll();
 
         public static void Reset() => AllowedZones.Clear();
         public static bool IsAllowed(Zone_Growing zone) => AllowedZones.Contains(zone);
