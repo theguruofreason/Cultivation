@@ -13,7 +13,7 @@
     <xpath>/Defs/TerrainDef[defName="Soil"]</xpath>
     <value>
       <modExtensions>
-        <li Class="Advanced_Cultivation.TerrainExtension">
+        <li Class="AdvancedCultivation.TerrainExtension">
           <tillsTo>AC_SoilTilled</tillsTo>
         </li>
       </modExtensions>
@@ -24,7 +24,7 @@
     <xpath>/Defs/TerrainDef[defName="MossyTerrain"]</xpath>
     <value>
       <modExtensions>
-        <li Class="Advanced_Cultivation.TerrainExtension">
+        <li Class="AdvancedCultivation.TerrainExtension">
           <tillsTo>AC_MossyTerrainTilled</tillsTo>
           <tillWorkAmount>460</tillWorkAmount>
         </li>
@@ -57,7 +57,7 @@
     <xpath>/Defs/TerrainDef[defName="MarshyTerrain"]</xpath>
     <value>
       <modExtensions>
-        <li Class="Advanced_Cultivation.TerrainExtension">
+        <li Class="AdvancedCultivation.TerrainExtension">
           <tillsTo>AC_MarshyTerrainTilled</tillsTo>
           <tillWorkAmount>520</tillWorkAmount>
         </li>
@@ -76,7 +76,7 @@
     <xpath>/Defs/TerrainDef[defName="SoilRich"]</xpath>
     <value>
       <modExtensions>
-        <li Class="Advanced_Cultivation.TerrainExtension">
+        <li Class="AdvancedCultivation.TerrainExtension">
           <tillsTo>AC_SoilRichTilled</tillsTo>
         </li>
       </modExtensions>
@@ -94,7 +94,7 @@
     <xpath>/Defs/TerrainDef[defName="Gravel"]</xpath>
     <value>
       <modExtensions>
-        <li Class="Advanced_Cultivation.TerrainExtension">
+        <li Class="AdvancedCultivation.TerrainExtension">
           <tillsTo>AC_GravelTilled</tillsTo>
         </li>
       </modExtensions>

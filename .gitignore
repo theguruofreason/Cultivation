@@ -9,3 +9,4 @@ TemporaryGeneratedFile*
 *.html
 Assemblies/Advanced_Cultivation.pdb
 !Assemblies/Advanced_Cultivation.dll
+build.force

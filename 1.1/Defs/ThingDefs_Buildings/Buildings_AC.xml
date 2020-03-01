@@ -4,7 +4,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>AC_CompostBin</defName>
     <label>compost bin</label>
-    <thingClass>Advanced_Cultivation.Building_AC_CompostBin</thingClass>
+    <thingClass>AdvancedCultivation.Building_AC_CompostBin</thingClass>
     <graphicData>
       <texPath>CompostBin</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -33,7 +33,7 @@
     </costList>
     <comps>
       <li Class="compProperties_Forbiddable"/>
-      <li Class="Advanced_Cultivation.CompProperties_AC_Fermenter">
+      <li Class="AdvancedCultivation.CompProperties_AC_Fermenter">
         <daysToFerment>6</daysToFerment>
         <minSafeTemp>0</minSafeTemp>
         <maxSafeTemp>80</maxSafeTemp>

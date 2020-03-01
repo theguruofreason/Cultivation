@@ -4,7 +4,7 @@
 	<WorkGiverDef>
 		<defName>FillCompostBin</defName>
 		<label>fill compost bin with raw compost</label>
-		<giverClass>Advanced_Cultivation.WorkGiver_FillCompostBin</giverClass>
+		<giverClass>AdvancedCultivation.WorkGiver_FillCompostBin</giverClass>
 		<workType>Hauling</workType>
 		<verb>fill</verb>
 		<gerund>filling</gerund>
@@ -17,7 +17,7 @@
 	<WorkGiverDef>
 		<defName>EmptyCompostBin</defName>
 		<label>take fermented compost out of compost bin</label>
-		<giverClass>Advanced_Cultivation.WorkGiver_EmptyCompostBin</giverClass>
+		<giverClass>AdvancedCultivation.WorkGiver_EmptyCompostBin</giverClass>
 		<workType>Hauling</workType>
 		<verb>take fermented compost</verb>
 		<gerund>taking fermented compost from</gerund>
@@ -47,7 +47,7 @@
   <WorkGiverDef>
     <defName>AC_TillCell</defName>
     <label>till field</label>
-    <giverClass>Advanced_Cultivation.WorkGiver_Till</giverClass>
+    <giverClass>AdvancedCultivation.WorkGiver_Till</giverClass>
     <workType>Growing</workType>
     <verb>till</verb>
     <gerund>tilling</gerund>
