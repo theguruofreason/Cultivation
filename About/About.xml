@@ -9,7 +9,7 @@
     </li>
 </modDependencies>
 <name>Advanced Cultivation</name>
-<packageId>Gasch.AC.AdvancedCultivation</packageId>
+<packageId>Gasch.AdvancedCultivation</packageId>
 <supportedVersions>
 	<li>1.0</li>
 	<li>1.1</li>

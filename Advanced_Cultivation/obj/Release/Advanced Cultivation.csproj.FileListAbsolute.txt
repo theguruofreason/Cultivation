@@ -5,3 +5,5 @@ C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Assemblies\AdvancedC
 C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Assemblies\AdvancedCultivation.pdb
 C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Advanced_Cultivation\obj\Release\AdvancedCultivation.dll
 C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\Advanced_Cultivation\obj\Release\AdvancedCultivation.pdb
+C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\1.1\Assemblies\AdvancedCultivation.dll
+C:\Users\thegu\Documents\Rimworld Mods\Advanced_Cultivation\1.1\Assemblies\AdvancedCultivation.pdb
