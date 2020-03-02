@@ -2,7 +2,7 @@
 <Defs>
 
   <!-- New Terrain -->
-	<TerrainDef Name="AC_TerrainBase" Abstract="True" ParentName="NaturalTerrainBase">
+	<TerrainDef Name="AC_TerrainBase" Abstract="True">
 		<renderPrecedence>340</renderPrecedence>
     <edgeType>FadeRough</edgeType>
 		<pathCost>2</pathCost>
@@ -27,7 +27,7 @@
     </tools>
 	</TerrainDef>
 
-  <TerrainDef Name="AC_DesignatableTerrainBase" Abstract="True" ParentName="NaturalTerrainBase">
+  <TerrainDef Name="AC_DesignatableTerrainBase" Abstract="True">
 		<renderPrecedence>340</renderPrecedence>
     <edgeType>FadeRough</edgeType>
 		<pathCost>2</pathCost>
@@ -62,7 +62,7 @@
     <label>tilled soil</label>
     <texturePath>Terrain/SoilTilled</texturePath>
     <modExtensions>
-      <li Class="AdvancedCultivation.TerrainExtension">
+      <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>Soil</tilledFrom>
       </li>
     </modExtensions>
@@ -77,7 +77,7 @@
     <label>tilled stony soil</label>
     <texturePath>Terrain/GravelTilled</texturePath>
     <modExtensions>
-      <li Class="AdvancedCultivation.TerrainExtension">
+      <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>Gravel</tilledFrom>
       </li>
     </modExtensions>
@@ -92,7 +92,7 @@
     <label>tilled lichen-covered soil</label>
     <texturePath>Terrain/MossyTerrainTilled</texturePath>
     <modExtensions>
-      <li Class="AdvancedCultivation.TerrainExtension">
+      <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>MossyTerrain</tilledFrom>
       </li>
     </modExtensions>
@@ -107,7 +107,7 @@
     <label>tilled marshy soil</label>
     <texturePath>Terrain/MarshyTerrainTilled</texturePath>
     <modExtensions>
-      <li Class="AdvancedCultivation.TerrainExtension">
+      <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>MarshyTerrain</tilledFrom>
       </li>
     </modExtensions>
@@ -122,7 +122,7 @@
     <label>tilled rich soil</label>
     <texturePath>Terrain/SoilRichTilled</texturePath>
     <modExtensions>
-      <li Class="AdvancedCultivation.TerrainExtension">
+      <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>SoilRich</tilledFrom>
       </li>
     </modExtensions>
@@ -138,7 +138,7 @@
     <description>fertilized soil with 100% fertility.</description>
     <texturePath>Terrain/SoilFertilized</texturePath>
     <modExtensions>
-      <li Class="AdvancedCultivation.TerrainExtension">
+      <li Class="Advanced_Cultivation.TerrainExtension">
         <tillsTo>AC_SoilFertilizedTilled</tillsTo>
       </li>
     </modExtensions>
@@ -157,7 +157,7 @@
     <label>tilled fertilized soil</label>
     <texturePath>Terrain/SoilFertilizedTilled</texturePath>
     <modExtensions>
-      <li Class="AdvancedCultivation.TerrainExtension">
+      <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>AC_SoilFertilized</tilledFrom>
       </li>
     </modExtensions>
@@ -173,7 +173,7 @@
     <description>enriched soil with 125% fertility.</description>
     <texturePath>Terrain/SoilEnriched</texturePath>
     <modExtensions>
-      <li Class="AdvancedCultivation.TerrainExtension">
+      <li Class="Advanced_Cultivation.TerrainExtension">
         <tillsTo>AC_SoilEnrichedTilled</tillsTo>
       </li>
     </modExtensions>
@@ -192,7 +192,7 @@
     <label>tilled enriched soil</label>
     <texturePath>Terrain/SoilEnrichedTilled</texturePath>
     <modExtensions>
-      <li Class="AdvancedCultivation.TerrainExtension">
+      <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>AC_SoilEnriched</tilledFrom>
       </li>
     </modExtensions>
@@ -208,7 +208,7 @@
     <description>miracle soil with 175% fertility.</description>
     <texturePath>Terrain/SoilMiracle</texturePath>
     <modExtensions>
-      <li Class="AdvancedCultivation.TerrainExtension">
+      <li Class="Advanced_Cultivation.TerrainExtension">
         <tillsTo>AC_SoilMiracleTilled</tillsTo>
       </li>
     </modExtensions>
@@ -227,7 +227,7 @@
     <label>tilled miracle soil</label>
     <texturePath>Terrain/SoilMiracleTilled</texturePath>
     <modExtensions>
-      <li Class="AdvancedCultivation.TerrainExtension">
+      <li Class="Advanced_Cultivation.TerrainExtension">
         <tilledFrom>AC_SoilMiracle</tilledFrom>
       </li>
     </modExtensions>

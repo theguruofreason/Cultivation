@@ -40,7 +40,7 @@
       <preferability>DesperateOnly</preferability>
     </ingestible>
     <comps>
-      <li Class="AdvancedCultivation.CompProperties_AC_Fermenter">
+      <li Class="Advanced_Cultivation.CompProperties_AC_Fermenter">
         <daysToFerment>10</daysToFerment>
         <minSafeTemp>0</minSafeTemp>
         <maxSafeTemp>80</maxSafeTemp>

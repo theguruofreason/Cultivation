@@ -36,7 +36,7 @@
 		<workSkill>Cooking</workSkill>
         <recipeUsers>
             <li>CraftingSpot</li>
-						<li>TableButcher</li>
+			<li>TableButcher</li>
         </recipeUsers>
     </RecipeDef>
 
@@ -75,7 +75,7 @@
 		<workSkill>Cooking</workSkill>
         <recipeUsers>
             <li>CraftingSpot</li>
-						<li>TableButcher</li>
+			<li>TableButcher</li>
         </recipeUsers>
     </RecipeDef>
 
