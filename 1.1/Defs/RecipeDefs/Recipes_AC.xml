@@ -8,6 +8,7 @@
         <jobString>Gathering materials to compost.</jobString>
         <allowMixingIngredients>true</allowMixingIngredients>
         <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+				<requiredGiverWorkType>Crafting</requiredGiverWorkType>
         <ingredients>
           <li>
             <filter>
@@ -34,10 +35,10 @@
         <effectWorking>Cook</effectWorking>
         <soundWorking>Recipe_CookMeal</soundWorking>
 		<workSkill>Cooking</workSkill>
-        <recipeUsers>
-            <li>CraftingSpot</li>
-			<li>TableButcher</li>
-        </recipeUsers>
+      <recipeUsers>
+          <li>ButcherSpot</li>
+					<li>TableButcher</li>
+      </recipeUsers>
     </RecipeDef>
 
     <RecipeDef>
@@ -47,6 +48,7 @@
         <jobString>Gathering materials to compost.</jobString>
         <allowMixingIngredients>true</allowMixingIngredients>
         <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+				<requiredGiverWorkType>Crafting</requiredGiverWorkType>
         <ingredients>
           <li>
             <filter>
@@ -73,10 +75,10 @@
         <effectWorking>Cook</effectWorking>
         <soundWorking>Recipe_CookMeal</soundWorking>
 		<workSkill>Cooking</workSkill>
-        <recipeUsers>
-            <li>CraftingSpot</li>
-			<li>TableButcher</li>
-        </recipeUsers>
+		<recipeUsers>
+				<li>ButcherSpot</li>
+				<li>TableButcher</li>
+		</recipeUsers>
     </RecipeDef>
 
   <RecipeDef>

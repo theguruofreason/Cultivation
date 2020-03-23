@@ -28,16 +28,17 @@
 	</WorkGiverDef>
 
   <WorkGiverDef>
-    <defName>DoBillsMakeFertilizer</defName>
-    <label>make fertilizer</label>
+    <defName>DoBillsMakeCompost</defName>
+    <label>make compost</label>
     <giverClass>WorkGiver_DoBill</giverClass>
     <workType>Crafting</workType>
     <priorityInType>95</priorityInType>
     <fixedBillGiverDefs>
       <li>TableButcher</li>
+			<li>ButcherSpot</li>
     </fixedBillGiverDefs>
     <verb>craft</verb>
-    <gerund>making fertilizer at</gerund>
+    <gerund>making compost at</gerund>
     <requiredCapacities>
       <li>Manipulation</li>
     </requiredCapacities>
